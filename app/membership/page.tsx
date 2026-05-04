@@ -1,4 +1,4 @@
-import { ShieldCheck, TrendingUp, Truck, Users, Sprout, Globe, ChevronRight } from "lucide-react";
+import { ShieldCheck, TrendingUp, Truck, Users, ChevronRight, CheckCircle, GraduationCap, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 
 export default function MembershipPage() {
