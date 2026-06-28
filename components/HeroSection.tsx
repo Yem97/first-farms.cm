@@ -36,27 +36,27 @@ export default function HeroSection() {
         style={{ background: "rgba(10,40,12,0.30)" }}
       />
 
-      {/* Centered hero content — pb-40 clears the action bar */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-40">
+      {/* Centered hero content — pb-36 clears the action bar height */}
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-36">
 
         {/* Badge */}
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-5 flex items-center gap-2"
+          className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4 flex items-center gap-2"
         >
           <Leaf className="w-3.5 h-3.5" />
           First Farms Cameroon
         </motion.p>
 
-        {/* Heading */}
+        {/* Heading — clamped to fit all content on screen */}
         <motion.h1
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.12 }}
-          className="font-bold font-poppins text-white uppercase leading-[1.0] tracking-tight mb-6"
-          style={{ fontSize: "clamp(2.8rem, 7vw, 5.5rem)" }}
+          className="font-bold font-poppins text-white uppercase leading-[1.05] tracking-tight mb-5"
+          style={{ fontSize: "clamp(1.9rem, 4vw, 3.5rem)" }}
         >
           Empowering Farmers.<br />
           <span
@@ -76,7 +76,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.28, duration: 0.6 }}
-          className="text-gray-300 text-base md:text-lg leading-relaxed mb-10 max-w-lg"
+          className="text-gray-300 text-sm md:text-base leading-relaxed mb-8 max-w-md"
         >
           Join Cameroon&apos;s most connected agricultural cooperative. Direct
           markets, professional training, and 500+ farmers across 10 regions.
@@ -90,7 +90,7 @@ export default function HeroSection() {
         >
           <Link
             href="/about"
-            className="inline-flex items-center gap-3 border-2 border-white/80 text-white px-10 py-3.5 text-sm font-bold uppercase tracking-[0.18em] hover:bg-white hover:text-primary transition-all duration-200"
+            className="inline-flex items-center gap-3 border-2 border-white/80 text-white px-10 py-3 text-sm font-bold uppercase tracking-[0.18em] hover:bg-white hover:text-primary transition-all duration-200"
           >
             Explore Our Cooperative
           </Link>
