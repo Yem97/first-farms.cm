@@ -14,30 +14,30 @@ export default function HeroSection() {
   return (
     <section className="relative overflow-hidden" style={{ height: "calc(100vh - 80px)", minHeight: "580px" }} id="hero">
 
-      {/* Farm background */}
+      {/* Farm background — lush green tropical farmland */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1500382017468-9049fee74a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')",
+            "url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')",
         }}
       />
 
-      {/* Overlay: dark vignette + green tint */}
+      {/* Overlay: lighter so the image shows through */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.72) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.28) 50%, rgba(0,0,0,0.65) 100%)",
         }}
       />
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "rgba(10,40,12,0.30)" }}
+        style={{ background: "rgba(10,40,12,0.18)" }}
       />
 
-      {/* Centered hero content — pb-36 clears the action bar height */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-36">
+      {/* Centered hero content — pt-16 keeps heading away from navbar, pb-36 clears action bar */}
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pt-16 pb-36">
 
         {/* Badge */}
         <motion.p
@@ -110,26 +110,26 @@ export default function HeroSection() {
               <Link
                 key={i}
                 href={href}
-                className="flex items-center gap-4 px-7 py-6 border-r border-gray-100 last-of-type:md:border-r hover:bg-gray-50 group transition-colors"
+                className="flex items-center gap-3 px-5 py-4 border-r border-gray-100 hover:bg-gray-50 group transition-colors"
               >
-                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                  <Icon className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-200">
+                  <Icon className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-primary text-sm font-poppins leading-tight">{label}</p>
-                  <p className="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">{sub}</p>
+                  <p className="font-bold text-primary text-xs font-poppins leading-tight truncate">{label}</p>
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5 truncate">{sub}</p>
                 </div>
-                <ArrowRight className="w-4 h-4 text-gray-300 shrink-0 group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
+                <ArrowRight className="w-3.5 h-3.5 text-gray-300 shrink-0 group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
               </Link>
             ))}
 
             {/* CTA column */}
             <Link
               href="/membership"
-              className="flex items-center justify-center gap-3 bg-primary hover:bg-primary/90 text-white px-8 py-6 font-bold text-sm uppercase tracking-widest transition-colors duration-200 group"
+              className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-4 font-bold text-xs uppercase tracking-widest transition-colors duration-200 group"
             >
               Join Now
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
           </motion.div>
         </div>
