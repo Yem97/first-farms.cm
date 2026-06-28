@@ -32,8 +32,8 @@ export default function HeroSection() {
         style={{ background: "linear-gradient(to bottom, transparent 10%, #F9A825 50%, transparent 90%)" }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center">
+      {/* Content — pb-28 offsets justify-center upward, clearing the stats card zone */}
+      <div className="relative z-10 h-full flex flex-col justify-center pb-28">
         <div className="mx-auto w-full px-6 max-w-[1200px]">
           <div className="max-w-2xl">
 
