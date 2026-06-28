@@ -10,7 +10,7 @@ interface TeamMember {
   _id: string;
   name: string;
   role: string;
-  photo?: { asset: { _ref: string } };
+  photo?: { asset: { _ref: string; _type: string } };
   localPhoto?: string;
 }
 

@@ -15,7 +15,7 @@ interface Testimonial {
   quote: string;
   farmerName: string;
   region: string;
-  photo?: { asset: { _ref: string } };
+  photo?: { asset: { _ref: string; _type: string } };
   localPhoto?: string;
 }
 
@@ -26,7 +26,7 @@ interface Product {
   farmerName?: string;
   region?: string;
   category?: string;
-  image?: { asset: { _ref: string } };
+  image?: { asset: { _ref: string; _type: string } };
   localImage?: string;
   whatsappNumber?: string;
 }

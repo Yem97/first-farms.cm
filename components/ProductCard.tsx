@@ -12,7 +12,7 @@ interface ProductProps {
     farmerName?: string;
     region?: string;
     category?: string;
-    image?: { asset: { _ref: string } } | null;
+    image?: { asset: { _ref: string; _type: string } } | null;
     localImage?: string;
     whatsappNumber?: string;
   };
