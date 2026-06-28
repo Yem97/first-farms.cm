@@ -3,10 +3,9 @@ import { featuredProductsQuery, upcomingTrainingsQuery, testimonialsQuery, teamM
 import { urlFor } from "@/sanity/lib/image";
 import HeroSection from "@/components/HeroSection";
 import ProductCard from "@/components/ProductCard";
-import TrainingCard from "@/components/TrainingCard";
 import {
   Users, ShoppingBag, GraduationCap, ChevronRight, Quote,
-  CheckCircle, Megaphone, ArrowRight, Leaf,
+  CheckCircle, ArrowRight, Leaf, MapPin, User, MessageCircle,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -41,6 +40,19 @@ interface TeamMember {
   role: string;
   photo?: { asset: { _ref: string; _type: string } };
   localPhoto?: string;
+}
+
+interface TrainingEvent {
+  _id: string;
+  title: string;
+  date?: string;
+  location?: string;
+  region?: string;
+  topic?: string;
+  trainer?: string;
+  registrationOpen?: boolean;
+  spotsAvailable?: number;
+  slug?: { current: string };
 }
 
 /* ── Fallback data ───────────────────────────────────────────────── */
@@ -82,6 +94,42 @@ const fallbackTeam: TeamMember[] = [
   { _id: "tm4", name: "Fatima Aboubakar", role: "Community Liaison",     localPhoto: "/images/avatars/team-4.svg" },
 ];
 
+const fallbackEvents: TrainingEvent[] = [
+  {
+    _id: "fe1",
+    title: "Soil Health & Organic Fertilisation",
+    date: "2026-07-15T09:00:00Z",
+    location: "Douala",
+    region: "Littoral",
+    topic: "Soil Management",
+    trainer: "Dr. Emmanuel Bih",
+    registrationOpen: true,
+    spotsAvailable: 40,
+  },
+  {
+    _id: "fe2",
+    title: "Post-Harvest Handling & Storage Techniques",
+    date: "2026-07-28T09:00:00Z",
+    location: "Yaoundé",
+    region: "Centre",
+    topic: "Post-Harvest",
+    trainer: "Mme. Céline Ateba",
+    registrationOpen: true,
+    spotsAvailable: 35,
+  },
+  {
+    _id: "fe3",
+    title: "Digital Market Access for Cooperative Members",
+    date: "2026-08-10T09:00:00Z",
+    location: "Bafoussam",
+    region: "Ouest",
+    topic: "Business Skills",
+    trainer: "First Farms Facilitator",
+    registrationOpen: false,
+    spotsAvailable: 60,
+  },
+];
+
 const partners = [
   { name: "AgroTech Littoral", initial: "AT", color: "#1B5E20" },
   { name: "GreenGrow Fund",    initial: "GG", color: "#00695C" },
@@ -93,10 +141,10 @@ const partners = [
 
 /* ── Page ────────────────────────────────────────────────────────── */
 export default async function Home() {
-  let featuredProducts: Product[]    = [];
-  let upcomingTrainings: unknown[]   = [];
-  let testimonials: Testimonial[]    = [];
-  let teamMembers: TeamMember[]      = [];
+  let featuredProducts: Product[]     = [];
+  let upcomingTrainings: TrainingEvent[] = [];
+  let testimonials: Testimonial[]     = [];
+  let teamMembers: TeamMember[]       = [];
 
   try {
     [featuredProducts, upcomingTrainings, testimonials, teamMembers] = await Promise.all([
@@ -109,9 +157,11 @@ export default async function Home() {
     // Sanity not configured — fallback content used
   }
 
-  const displayProducts     = featuredProducts.length  > 0 ? featuredProducts  : fallbackProducts;
-  const displayTestimonials = testimonials.length       > 0 ? testimonials       : fallbackTestimonials;
-  const displayTeam         = teamMembers.length        > 0 ? teamMembers        : fallbackTeam;
+  const displayProducts     = featuredProducts.length    > 0 ? featuredProducts    : fallbackProducts;
+  const displayTestimonials = testimonials.length         > 0 ? testimonials         : fallbackTestimonials;
+  const displayTeam         = teamMembers.length          > 0 ? teamMembers          : fallbackTeam;
+  const displayEvents       = upcomingTrainings.length    > 0 ? upcomingTrainings    : fallbackEvents;
+  const waNumber            = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "237XXXXXXXXX";
 
   return (
     <div className="bg-background">
@@ -253,47 +303,104 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── TRAINING / EDUCATION ──────────────────────────────────── */}
-      <section className="py-20 bg-primary relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5 pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle at 80% 20%, #F9A825 0%, transparent 50%)" }}
-        />
-        <div className="mx-auto px-6 max-w-[1200px] relative z-10">
+      {/* ── UPCOMING EVENTS ───────────────────────────────────────────── */}
+      <section className="py-20 bg-gray-50 border-y border-gray-100">
+        <div className="mx-auto px-6 max-w-[1200px]">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
             <div>
               <span className="text-secondary font-bold uppercase tracking-widest text-xs block mb-2">
-                Knowledge Is Power
+                Grow Your Skills
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold font-poppins text-white">
-                Grow Your Agricultural Skills
+              <h2 className="text-3xl md:text-4xl font-bold font-poppins text-primary">
+                Upcoming Workshops
               </h2>
+              <p className="text-gray-500 mt-2 text-sm">
+                {upcomingTrainings.length > 0
+                  ? `${upcomingTrainings.length} session${upcomingTrainings.length > 1 ? "s" : ""} open — register your spot today`
+                  : "Sessions across all 10 regions of Cameroon"}
+              </p>
             </div>
             <Link
               href="/education"
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 py-3 rounded-xl font-bold transition-all text-sm"
+              className="inline-flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white px-6 py-3 rounded-xl font-bold transition-all text-sm"
             >
               Full Program <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-6">
-            {upcomingTrainings.length > 0 ? (
-              upcomingTrainings.map((event) => (
-                <div key={(event as { _id: string })._id}>
-                  <TrainingCard event={event as Parameters<typeof TrainingCard>[0]["event"]} />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {displayEvents.map((event) => {
+              const eventDate = event.date ? new Date(event.date) : null;
+              const day       = eventDate?.toLocaleDateString("en-US", { day: "2-digit" }) ?? "--";
+              const monthYear = eventDate
+                ? eventDate.toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase()
+                : "DATE TBD";
+              const waMsg = encodeURIComponent(`Hello First Farms! I would like to register for: ${event.title}`);
+              const isOpen = event.registrationOpen !== false;
+
+              return (
+                <div key={event._id} className="bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 overflow-hidden flex flex-col">
+                  {/* Date + topic header */}
+                  <div className="bg-primary px-6 pt-5 pb-5 flex items-start justify-between">
+                    <div>
+                      <span className="text-5xl font-black text-white font-poppins leading-none block">{day}</span>
+                      <span className="text-secondary text-[11px] font-bold uppercase tracking-widest">{monthYear}</span>
+                    </div>
+                    <div className="flex flex-col items-end gap-2">
+                      {event.topic && (
+                        <span className="bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                          {event.topic}
+                        </span>
+                      )}
+                      <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase ${isOpen ? "text-green-300" : "text-red-300"}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${isOpen ? "bg-green-400 animate-pulse" : "bg-red-400"}`} />
+                        {isOpen ? "Open" : "Full"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Body */}
+                  <div className="px-6 py-5 flex-1 flex flex-col gap-4">
+                    <h3 className="font-bold font-poppins text-primary text-base leading-snug">{event.title}</h3>
+                    <div className="space-y-2">
+                      {(event.location || event.region) && (
+                        <div className="flex items-center gap-2 text-gray-500 text-sm">
+                          <MapPin className="w-4 h-4 text-primary shrink-0" />
+                          <span>{[event.location, event.region].filter(Boolean).join(", ")}</span>
+                        </div>
+                      )}
+                      {event.trainer && (
+                        <div className="flex items-center gap-2 text-gray-500 text-sm">
+                          <User className="w-4 h-4 text-primary shrink-0" />
+                          <span>{event.trainer}</span>
+                        </div>
+                      )}
+                      {event.spotsAvailable != null && (
+                        <div className="flex items-center gap-2 text-sm font-semibold">
+                          <GraduationCap className="w-4 h-4 text-primary shrink-0" />
+                          <span className={isOpen ? "text-green-600" : "text-red-500"}>
+                            {event.spotsAvailable} spots available
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <a
+                      href={`https://wa.me/${waNumber}?text=${waMsg}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`mt-auto flex items-center justify-center gap-2 font-bold text-sm py-3 rounded-xl transition-all ${
+                        isOpen
+                          ? "bg-primary/10 hover:bg-primary text-primary hover:text-white"
+                          : "bg-gray-100 text-gray-400 cursor-not-allowed pointer-events-none"
+                      }`}
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      {isOpen ? "Register via WhatsApp" : "Registration Closed"}
+                    </a>
+                  </div>
                 </div>
-              ))
-            ) : (
-              <div className="bg-white/10 border border-white/20 rounded-3xl p-12 text-center">
-                <GraduationCap className="w-12 h-12 text-secondary mx-auto mb-4 opacity-70" />
-                <p className="text-white font-semibold text-lg mb-2">New sessions being scheduled</p>
-                <p className="text-gray-300 text-sm">
-                  Check back soon or{" "}
-                  <Link href="/education" className="text-secondary underline underline-offset-2 hover:no-underline">
-                    register your interest
-                  </Link>.
-                </p>
-              </div>
-            )}
+              );
+            })}
           </div>
         </div>
       </section>
