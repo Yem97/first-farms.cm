@@ -8,7 +8,12 @@ import Link from "next/link";
 export const dynamic = 'force-dynamic';
 
 export default async function MarketplacePage() {
-  const products = await client.fetch(productsQuery);
+  let products: unknown[] = [];
+  try {
+    products = await client.fetch(productsQuery);
+  } catch {
+    // Sanity not yet configured
+  }
 
   return (
     <div className="pt-20">

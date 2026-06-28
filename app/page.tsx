@@ -10,12 +10,84 @@ import Image from "next/image";
 
 export const dynamic = 'force-dynamic';
 
+interface Testimonial {
+  _id?: string;
+  quote: string;
+  farmerName: string;
+  region: string;
+  photo?: { asset: { _ref: string } };
+  localPhoto?: string;
+}
+
+interface Product {
+  _id: string;
+  name: string;
+  price: string;
+  farmerName?: string;
+  region?: string;
+  category?: string;
+  image?: { asset: { _ref: string } };
+  localImage?: string;
+  whatsappNumber?: string;
+}
+
+const fallbackTestimonials: Testimonial[] = [
+  {
+    _id: 'ft1',
+    quote: "Since joining First Farms, I have doubled my income by selling directly to buyers in Douala. No more middlemen taking our profits.",
+    farmerName: "Celestin Bakam",
+    region: "Adamaoua",
+    localPhoto: "/images/avatars/testimonial-1.svg",
+  },
+  {
+    _id: 'ft2',
+    quote: "The training on soil management completely changed how I grow my tomatoes. My harvest is now three times bigger and healthier. A true blessing.",
+    farmerName: "Beatrice Ngono",
+    region: "Littoral",
+    localPhoto: "/images/avatars/testimonial-2.svg",
+  },
+  {
+    _id: 'ft3',
+    quote: "First Farms gave me access to tools, storage, and markets I never thought I could reach as a small farmer in the North.",
+    farmerName: "Ibrahim Yaya",
+    region: "Nord",
+    localPhoto: "/images/avatars/testimonial-3.svg",
+  },
+];
+
+const fallbackProducts: Product[] = [
+  { _id: 'fp1', name: 'Premium Plantains', price: '5,000 XAF / bunch', farmerName: 'Celestin Bakam', region: 'Littoral', category: 'Fruits' },
+  { _id: 'fp2', name: 'Fresh Tomatoes (25 kg)', price: '15,000 XAF', farmerName: 'Fatima Aboubakar', region: 'Adamaoua', category: 'Vegetables' },
+  { _id: 'fp3', name: 'Moringa Powder (500 g)', price: '8,000 XAF', farmerName: 'Green Valley Farm', region: 'Sud-Ouest', category: 'Processed' },
+  { _id: 'fp4', name: 'Organic Maize (50 kg)', price: '20,000 XAF', farmerName: 'Jean-Baptiste Mbo', region: 'Ouest', category: 'Grains' },
+];
+
+const partners = [
+  { name: 'AgroTech Littoral', initial: 'AT', color: '#1B5E20' },
+  { name: 'GreenGrow Fund', initial: 'GG', color: '#00695C' },
+  { name: 'SeedFirst CM', initial: 'SF', color: '#F9A825' },
+  { name: 'FarmLink Network', initial: 'FL', color: '#0277BD' },
+  { name: 'EcoHarvest Africa', initial: 'EH', color: '#2E7D32' },
+  { name: 'NourishCM', initial: 'NC', color: '#E65100' },
+];
+
 export default async function Home() {
-  const [featuredProducts, upcomingTrainings, testimonials] = await Promise.all([
-    client.fetch(featuredProductsQuery),
-    client.fetch(upcomingTrainingsQuery),
-    client.fetch(testimonialsQuery),
-  ]);
+  let featuredProducts: Product[] = [];
+  let upcomingTrainings: unknown[] = [];
+  let testimonials: Testimonial[] = [];
+
+  try {
+    [featuredProducts, upcomingTrainings, testimonials] = await Promise.all([
+      client.fetch(featuredProductsQuery),
+      client.fetch(upcomingTrainingsQuery),
+      client.fetch(testimonialsQuery),
+    ]);
+  } catch {
+    // Sanity not yet configured — fallback content used below
+  }
+
+  const displayProducts = featuredProducts.length > 0 ? featuredProducts : fallbackProducts;
+  const displayTestimonials = testimonials.length > 0 ? testimonials : fallbackTestimonials;
 
   const stats = [
     { label: "Members", value: "500+", icon: Users },
@@ -48,7 +120,7 @@ export default async function Home() {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="w-full lg:w-1/2 relative">
             <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                 alt="Cameroonian Farmers"
                 fill
@@ -56,7 +128,7 @@ export default async function Home() {
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-secondary p-8 rounded-3xl shadow-xl hidden md:block max-w-[240px]">
-              <p className="text-accent font-bold text-lg leading-tight">"Stronger Together, Producing Excellence."</p>
+              <p className="text-accent font-bold text-lg leading-tight">&ldquo;Stronger Together, Producing Excellence.&rdquo;</p>
             </div>
           </div>
           <div className="w-full lg:w-1/2 space-y-8 text-left">
@@ -68,8 +140,8 @@ export default async function Home() {
             <p className="text-gray-600 text-lg leading-relaxed">
               We provide our members with the tools, training, and direct market links needed to thrive in a modern economy while preserving our rich agricultural heritage.
             </p>
-            <Link 
-              href="/about" 
+            <Link
+              href="/about"
               className="inline-flex items-center gap-2 text-primary font-bold border-b-2 border-secondary pb-1 hover:text-secondary transition-colors"
             >
               Discover Our Full Story <ChevronRight className="w-4 h-4" />
@@ -111,15 +183,10 @@ export default async function Home() {
             View Marketplace <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
-        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {featuredProducts.length > 0 ? (
-            featuredProducts.map((product: any) => (
-              <ProductCard key={product._id} product={product} />
-            ))
-          ) : (
-            <p className="col-span-full py-12 text-center text-gray-400 italic">Fresh products coming soon to the marketplace.</p>
-          )}
+          {displayProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
         </div>
       </section>
 
@@ -138,20 +205,23 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
             {upcomingTrainings.length > 0 ? (
-              upcomingTrainings.map((event: any) => (
-                <div key={event._id} className="text-text">
-                  <TrainingCard event={event} />
+              upcomingTrainings.map((event) => (
+                <div key={(event as { _id: string })._id} className="text-text">
+                  <TrainingCard event={event as Parameters<typeof TrainingCard>[0]['event']} />
                 </div>
               ))
             ) : (
-              <p className="py-12 text-center text-gray-400 italic">Stay tuned for upcoming workshops.</p>
+              <div className="bg-white/10 border border-white/20 rounded-3xl p-12 text-center">
+                <GraduationCap className="w-12 h-12 text-secondary mx-auto mb-4 opacity-60" />
+                <p className="text-gray-300 font-medium">New training sessions being scheduled.</p>
+                <p className="text-gray-400 text-sm mt-2">Check back soon or <Link href="/education" className="text-secondary underline">visit the Education page</Link> to register your interest.</p>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Decorative Leaf Background */}
         <div className="absolute top-0 right-0 p-10 opacity-10 pointer-events-none transform rotate-12">
-            <Sprout className="w-64 h-64" />
+          <Sprout className="w-64 h-64" />
         </div>
       </section>
 
@@ -163,15 +233,21 @@ export default async function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {testimonials.length > 0 ? (
-            testimonials.map((t: any, idx: number) => (
-              <div key={idx} className="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow">
+          {displayTestimonials.map((t, idx) => {
+            const photoSrc = t.localPhoto
+              ? t.localPhoto
+              : t.photo
+              ? urlFor(t.photo).url()
+              : null;
+
+            return (
+              <div key={t._id ?? idx} className="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow">
                 <Quote className="w-10 h-10 text-secondary/40 mb-6" />
-                <p className="text-gray-600 text-lg italic leading-relaxed mb-10 flex-grow">"{t.quote}"</p>
+                <p className="text-gray-600 text-lg italic leading-relaxed mb-10 flex-grow">&ldquo;{t.quote}&rdquo;</p>
                 <div className="flex items-center gap-4 pt-6 border-t border-gray-50">
-                  {t.photo && (
+                  {photoSrc && (
                     <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-secondary">
-                      <Image src={urlFor(t.photo).url()} alt={t.farmerName} fill className="object-cover" />
+                      <Image src={photoSrc} alt={t.farmerName} fill className="object-cover" />
                     </div>
                   )}
                   <div>
@@ -180,24 +256,28 @@ export default async function Home() {
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="col-span-full bg-white p-10 rounded-3xl shadow-sm border border-gray-100 text-center">
-               <p className="text-gray-400 italic">Farmer success stories coming soon.</p>
-            </div>
-          )}
+            );
+          })}
         </div>
       </section>
 
-      {/* Partners logo bar */}
+      {/* Partners Logo Bar */}
       <section className="py-16 bg-gray-50 border-y border-gray-100">
         <div className="container mx-auto px-6">
-           <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-10">Trusted By Our Partners</p>
-           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="w-24 h-12 bg-gray-300 rounded animate-pulse transition-all"></div>
-              ))}
-           </div>
+          <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-10">Trusted By Our Partners</p>
+          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+            {partners.map((partner) => (
+              <div key={partner.name} className="flex flex-col items-center gap-2 group">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-white text-sm shadow-sm group-hover:scale-110 transition-transform"
+                  style={{ backgroundColor: partner.color }}
+                >
+                  {partner.initial}
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 whitespace-nowrap">{partner.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
@@ -205,22 +285,12 @@ export default async function Home() {
 }
 
 function Sprout({ className }: { className?: string }) {
-    return (
-        <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="24" 
-            height="24" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            className={className}
-        >
-            <path d="m12 22 4-4-3-3" />
-            <path d="m9 8 5.5-5.5a.5.5 0 0 1 .7 0l2.3 2.3a.5.5 0 0 1 0 .7L12 11" />
-            <path d="M16 18c0-3.3-2.7-6-6-6s-6 2.7-6 6v4h12v-4Z" />
-        </svg>
-    );
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="m12 22 4-4-3-3" />
+      <path d="m9 8 5.5-5.5a.5.5 0 0 1 .7 0l2.3 2.3a.5.5 0 0 1 0 .7L12 11" />
+      <path d="M16 18c0-3.3-2.7-6-6-6s-6 2.7-6 6v4h12v-4Z" />
+    </svg>
+  );
 }

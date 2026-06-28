@@ -1,5 +1,6 @@
-import { MessageCircle, Mail, Phone, MapPin, Facebook, Instagram, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import ContactForm from "@/components/ContactForm";
 
 export default function ContactPage() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "237XXXXXXXXX";
@@ -89,47 +90,8 @@ export default function ContactPage() {
           {/* Form */}
           <div className="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-gray-100 relative">
             <h2 className="text-3xl font-bold font-poppins text-primary mb-4">Send a Message</h2>
-            <p className="text-gray-400 mb-10">We'll respond to your inquiry as soon as possible.</p>
-            
-            <form name="contact" method="POST" data-netlify="true" className="space-y-6">
-              <input type="hidden" name="form-name" value="contact" />
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-gray-700 ml-1 block text-left">Your Name</label>
-                <input type="text" name="name" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-gray-700 ml-1 block text-left">Email Address</label>
-                  <input type="email" name="email" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-gray-700 ml-1 block text-left">Phone Number</label>
-                   <input type="tel" name="phone" className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-gray-700 ml-1 block text-left">Subject</label>
-                <select name="subject" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors appearance-none font-medium">
-                  <option value="">Select a Subject</option>
-                  <option value="Membership">Membership Inquiry</option>
-                  <option value="Sales">Buying Produce</option>
-                  <option value="Training">Training Participation</option>
-                  <option value="Partnership">Partnerships / Sponsorships</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-gray-700 ml-1 block text-left">Message</label>
-                <textarea name="message" rows={5} required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors"></textarea>
-              </div>
-
-              <button type="submit" className="w-full bg-primary text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl hover:bg-accent transition-all active:scale-95">
-                Send Message
-              </button>
-            </form>
+            <p className="text-gray-400 mb-10">We will respond to your inquiry as soon as possible.</p>
+            <ContactForm />
           </div>
         </div>
       </section>

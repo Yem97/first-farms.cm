@@ -3,11 +3,17 @@ import { trainingEventsQuery } from "@/sanity/lib/queries";
 import TrainingCard from "@/components/TrainingCard";
 import { BookOpen, Leaf, BarChart3, Database, Smartphone, Info } from "lucide-react";
 import Image from "next/image";
+import TrainingInterestForm from "@/components/TrainingInterestForm";
 
 export const dynamic = 'force-dynamic';
 
 export default async function EducationPage() {
-  const events = await client.fetch(trainingEventsQuery);
+  let events: unknown[] = [];
+  try {
+    events = await client.fetch(trainingEventsQuery);
+  } catch {
+    // Sanity not yet configured
+  }
 
   const categories = [
     { title: "Soil Management", desc: "Understanding soil health, pH balance, and organic fertilization.", icon: Leaf },
@@ -113,16 +119,21 @@ export default async function EducationPage() {
         <div className="container mx-auto px-6 text-center">
            <h2 className="text-3xl font-bold font-poppins mb-16">Program Impact</h2>
            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[1, 2, 3, 4].map((i) => (
+              {[
+                { src: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80", city: "Ebolowa" },
+                { src: "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=400&q=80", city: "Bafoussam" },
+                { src: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=400&q=80", city: "Garoua" },
+                { src: "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=400&q=80", city: "Buea" },
+              ].map((item, i) => (
                 <div key={i} className="relative aspect-square rounded-3xl overflow-hidden group">
-                   <Image 
-                      src={`https://images.unsplash.com/photo-${1510000000000 + i}?auto=format&fit=crop&w=400&q=80`} 
-                      alt="Impact" 
-                      fill 
+                   <Image
+                      src={item.src}
+                      alt={`Farmer Training in ${item.city}`}
+                      fill
                       className="object-cover group-hover:scale-110 transition-all duration-700 opacity-60"
                    />
                    <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/80 to-transparent">
-                      <p className="text-xs font-bold text-left italic">Farmer Training in {['Ebolowa', 'Bafoussam', 'Garoua', 'Buea'][i-1]}</p>
+                      <p className="text-xs font-bold text-left italic">Farmer Training in {item.city}</p>
                    </div>
                 </div>
               ))}
@@ -130,34 +141,11 @@ export default async function EducationPage() {
         </div>
       </section>
 
-      {/* Newsletter / Interest Form */}
+      {/* Interest Form */}
       <section className="py-24 container mx-auto px-6 max-w-3xl">
          <div className="bg-white p-12 rounded-[2.5rem] shadow-xl border border-gray-100">
             <h2 className="text-2xl font-bold font-poppins text-primary text-center mb-10">Register Your Interest</h2>
-            <form name="training-interest" method="POST" data-netlify="true" className="space-y-6">
-               <input type="hidden" name="form-name" value="training-interest" />
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-1.5">
-                     <label className="text-sm font-bold text-gray-700 ml-1">Full Name</label>
-                     <input type="text" name="name" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                  </div>
-                  <div className="space-y-1.5">
-                     <label className="text-sm font-bold text-gray-700 ml-1">Phone Number</label>
-                     <input type="tel" name="phone" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                  </div>
-               </div>
-               <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-gray-700 ml-1">Preferred Topic of Interest</label>
-                  <select name="topic" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors appearance-none">
-                     <option value="">Select Topic</option>
-                     {categories.map(c => <option key={c.title} value={c.title}>{c.title}</option>)}
-                     <option value="Other">Other</option>
-                  </select>
-               </div>
-               <button type="submit" className="w-full bg-primary text-white py-4 rounded-2xl font-bold shadow-md hover:bg-secondary hover:text-accent transition-all active:scale-95">
-                  Notify Me of Next session
-               </button>
-            </form>
+            <TrainingInterestForm />
          </div>
       </section>
     </div>

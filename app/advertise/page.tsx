@@ -1,12 +1,18 @@
 import { client } from "@/sanity/lib/client";
 import { advertPackagesQuery } from "@/sanity/lib/queries";
-import { CheckCircle, BarChart3, TrendingUp, Users, Sprout, MessageSquare } from "lucide-react";
+import { CheckCircle, BarChart3, Users, Sprout } from "lucide-react";
 import Link from "next/link";
+import AdvertiseForm from "@/components/AdvertiseForm";
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdvertisePage() {
-  const packages = await client.fetch(advertPackagesQuery);
+  let packages: { _id: string; name: string; price: string; duration: string; features?: string[]; highlighted?: boolean }[] = [];
+  try {
+    packages = await client.fetch(advertPackagesQuery);
+  } catch {
+    // Sanity not yet configured
+  }
 
   const benefits = [
     { title: "Targeted Audience", desc: "Reach active farmers, wholesalers, and agricultural investors directly across 10 regions.", icon: Users },
@@ -102,44 +108,7 @@ export default async function AdvertisePage() {
          <div className="container mx-auto px-6 max-w-3xl">
             <div className="bg-white p-12 rounded-[2.5rem] shadow-xl border border-gray-100">
                <h2 className="text-3xl font-bold font-poppins text-primary text-center mb-10">Advertisement Inquiry</h2>
-               <form name="advertise-inquiry" method="POST" data-netlify="true" className="space-y-6">
-                  <input type="hidden" name="form-name" value="advertise-inquiry" />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                     <div className="space-y-1.5">
-                        <label className="text-sm font-bold text-gray-700 ml-1 text-left block">Contact Name</label>
-                        <input type="text" name="name" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                     </div>
-                     <div className="space-y-1.5">
-                        <label className="text-sm font-bold text-gray-700 ml-1 text-left block">Business Name</label>
-                        <input type="text" name="business" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                     </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                     <div className="space-y-1.5">
-                        <label className="text-sm font-bold text-gray-700 ml-1 text-left block">Email Address</label>
-                        <input type="email" name="email" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                     </div>
-                     <div className="space-y-1.5">
-                        <label className="text-sm font-bold text-gray-700 ml-1 text-left block">Phone Number</label>
-                        <input type="tel" name="phone" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                     </div>
-                  </div>
-                  <div className="space-y-1.5 text-left block">
-                     <label className="text-sm font-bold text-gray-700 ml-1">Interested Package</label>
-                     <select name="package" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors appearance-none font-medium">
-                        <option value="">Select Package</option>
-                        {packages?.map((p:any) => <option key={p.name} value={p.name}>{p.name}</option>)}
-                        <option value="Custom">Custom Quote / Other</option>
-                     </select>
-                  </div>
-                  <div className="space-y-1.5 text-left block">
-                     <label className="text-sm font-bold text-gray-700 ml-1">Your Message</label>
-                     <textarea name="message" rows={4} className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors"></textarea>
-                  </div>
-                  <button type="submit" className="w-full bg-primary text-white py-4 rounded-2xl font-bold shadow-lg hover:bg-accent transition-all active:scale-95">
-                     Send Advertising Inquiry
-                  </button>
-               </form>
+               <AdvertiseForm packages={packages} />
             </div>
          </div>
       </section>

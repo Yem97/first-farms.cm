@@ -1,5 +1,6 @@
 import { ShieldCheck, TrendingUp, Truck, Users, ChevronRight, CheckCircle, GraduationCap, ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import MembershipForm from "@/components/MembershipForm";
 
 export default function MembershipPage() {
   const regions = [
@@ -134,47 +135,8 @@ export default function MembershipPage() {
         <div className="container mx-auto px-6 max-w-3xl">
           <div className="bg-white p-12 rounded-3xl shadow-xl border border-gray-100">
             <h2 className="text-3xl font-bold font-poppins text-primary text-center mb-4">Registration Form</h2>
-            <p className="text-center text-gray-400 mb-10">All fields are required. We will contact you within 2 business days.</p>
-            <form name="membership-registration" method="POST" data-netlify="true" className="space-y-6">
-              <input type="hidden" name="form-name" value="membership-registration" />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-gray-700 ml-1">Full Name</label>
-                  <input type="text" name="name" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-gray-700 ml-1">Phone Number</label>
-                  <input type="tel" name="phone" required placeholder="e.g. 6XX XXX XXX" className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-                </div>
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-gray-700 ml-1">Email Address</label>
-                <input type="email" name="email" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-gray-700 ml-1">Region</label>
-                  <select name="region" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors appearance-none">
-                    <option value="">Select Region</option>
-                    {regions.map(r => <option key={r} value={r}>{r}</option>)}
-                  </select>
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-gray-700 ml-1">Type of Farming</label>
-                  <select name="type" required className="w-full bg-gray-50 border-gray-100 border-2 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors appearance-none">
-                    <option value="">Select Primary Type</option>
-                    <option value="Vegetables">Vegetables</option>
-                    <option value="Cocoa">Cocoa / Coffee</option>
-                    <option value="Livestock">Livestock</option>
-                    <option value="Grains">Grains & Legumes</option>
-                    <option value="Fruit">Fruits</option>
-                  </select>
-                </div>
-              </div>
-              <button type="submit" className="w-full bg-primary text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl hover:bg-accent transition-all active:scale-95">
-                Submit Membership Application
-              </button>
-            </form>
+            <p className="text-center text-gray-400 mb-10">We will contact you within 2 business days of your application.</p>
+            <MembershipForm />
           </div>
         </div>
       </section>

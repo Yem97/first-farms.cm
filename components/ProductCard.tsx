@@ -12,7 +12,8 @@ interface ProductProps {
     farmerName?: string;
     region?: string;
     category?: string;
-    image?: any;
+    image?: { asset: { _ref: string } } | null;
+    localImage?: string;
     whatsappNumber?: string;
   };
 }
@@ -29,11 +30,11 @@ export default function ProductCard({ product }: ProductProps) {
       id={`product-${product.name.toLowerCase().replace(/\s+/g, '-')}`}
     >
       <div className="relative aspect-square overflow-hidden bg-gray-50">
-        {product.image ? (
-          <Image 
-            src={urlFor(product.image).url()} 
-            alt={product.name} 
-            fill 
+        {(product.localImage || product.image) ? (
+          <Image
+            src={product.localImage ?? urlFor(product.image!).url()}
+            alt={product.name}
+            fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (

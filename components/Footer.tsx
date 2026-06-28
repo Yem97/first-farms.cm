@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import { Facebook, Instagram, Phone, Mail, MapPin, Sprout } from "lucide-react";
+import { Facebook, Instagram, Phone, Mail, MapPin, Sprout, MessageCircle } from "lucide-react";
+import { useState } from "react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -62,27 +65,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* Newsletter / WhatsApp */}
           <div>
-            <h3 className="text-lg font-bold mb-6 font-poppins text-secondary">Newsletter</h3>
-            <p className="text-sm text-gray-300 mb-4">Stay updated with our latest agricultural news and events.</p>
-            <form name="newsletter" method="POST" data-netlify="true" className="flex flex-col gap-2">
-              <input 
-                type="email" 
-                name="email" 
-                placeholder="Your email address" 
-                required 
-                className="bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-secondary transition-colors"
-                id="footer-newsletter-email"
-              />
-              <button 
-                type="submit" 
-                className="bg-primary hover:bg-primary/90 text-white font-bold py-2.5 rounded-lg text-sm transition-all"
-                id="footer-newsletter-submit"
-              >
-                Subscribe Now
-              </button>
-            </form>
+            <h3 className="text-lg font-bold mb-6 font-poppins text-secondary">Stay Connected</h3>
+            <p className="text-sm text-gray-300 mb-6">Get the latest news, market prices, and training alerts directly on WhatsApp.</p>
+            <NewsletterWidget />
           </div>
         </div>
 
@@ -91,5 +78,47 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function NewsletterWidget() {
+  const [phone, setPhone] = useState("");
+  const [done, setDone] = useState(false);
+  const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "237XXXXXXXXX";
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const msg = encodeURIComponent(`Hello First Farms! I'd like to subscribe to your WhatsApp updates. My number is ${phone}.`);
+    window.open(`https://wa.me/${whatsapp}?text=${msg}`, "_blank");
+    setDone(true);
+  }
+
+  if (done) {
+    return (
+      <div className="bg-white/10 border border-white/20 rounded-xl p-4 text-center space-y-2">
+        <p className="text-secondary font-bold text-sm">You are subscribed!</p>
+        <p className="text-gray-400 text-xs">You will receive updates directly on WhatsApp.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <input
+        type="tel"
+        placeholder="Your WhatsApp number"
+        value={phone}
+        onChange={e => setPhone(e.target.value)}
+        required
+        className="bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-secondary transition-colors placeholder-gray-400"
+      />
+      <button
+        type="submit"
+        className="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-2.5 rounded-lg text-sm transition-all flex items-center justify-center gap-2"
+      >
+        <MessageCircle className="w-4 h-4 fill-current" />
+        Subscribe via WhatsApp
+      </button>
+    </form>
   );
 }
