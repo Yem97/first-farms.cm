@@ -4,7 +4,7 @@ import { urlFor } from "@/sanity/lib/image";
 import HeroSection from "@/components/HeroSection";
 import ProductCard from "@/components/ProductCard";
 import TrainingCard from "@/components/TrainingCard";
-import { Users, MapPin, ShoppingBag, GraduationCap, ChevronRight, Quote } from "lucide-react";
+import { Users, ShoppingBag, GraduationCap, ChevronRight, Quote } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -89,31 +89,9 @@ export default async function Home() {
   const displayProducts = featuredProducts.length > 0 ? featuredProducts : fallbackProducts;
   const displayTestimonials = testimonials.length > 0 ? testimonials : fallbackTestimonials;
 
-  const stats = [
-    { label: "Members", value: "500+", icon: Users },
-    { label: "Regions", value: "12", icon: MapPin },
-    { label: "Products", value: "200+", icon: ShoppingBag },
-    { label: "Training Sessions", value: "50+", icon: GraduationCap },
-  ];
-
   return (
     <div>
       <HeroSection />
-
-      {/* Stats Bar */}
-      <section className="bg-white py-12 shadow-sm relative z-20 mx-4 md:mx-auto max-w-6xl -mt-10 rounded-2xl border border-gray-100">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, idx) => (
-              <div key={idx} className="flex flex-col items-center text-center">
-                <stat.icon className="w-8 h-8 text-secondary mb-3" />
-                <span className="text-3xl font-bold text-primary font-poppins">{stat.value}</span>
-                <span className="text-gray-500 text-xs font-bold uppercase tracking-wider">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* About Snippet */}
       <section className="py-24 container mx-auto px-6">
@@ -156,9 +134,9 @@ export default async function Home() {
           <h2 className="text-3xl md:text-4xl font-bold font-poppins text-primary mb-16">Cooperative Benefits</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
-              { title: "Direct Marketplace", desc: "Sell your harvest directly to consumers and businesses without middleman fees.", icon: ShoppingBag, color: "bg-green-100 text-green-700" },
-              { title: "Farmer Education", desc: "Regular workshops on soil management, business skills, and modern farming techniques.", icon: GraduationCap, color: "bg-blue-100 text-blue-700" },
-              { title: "Group Synergy", desc: "Collective bargaining power for seeds, equipment, and logistics across all 12 regions.", icon: Users, color: "bg-orange-100 text-orange-700" },
+              { title: "Direct Marketplace", desc: "Sell your harvest directly to consumers and businesses without middleman fees.", icon: ShoppingBag, color: "bg-primary/10 text-primary" },
+              { title: "Farmer Education", desc: "Regular workshops on soil management, business skills, and modern farming techniques.", icon: GraduationCap, color: "bg-secondary/20 text-accent" },
+              { title: "Group Synergy", desc: "Collective bargaining power for seeds, equipment, and logistics across all 12 regions.", icon: Users, color: "bg-accent/10 text-accent" },
             ].map((feature, idx) => (
               <div key={idx} className="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all h-full flex flex-col items-center">
                 <div className={`p-5 rounded-2xl mb-8 ${feature.color}`}>
