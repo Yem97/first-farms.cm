@@ -14,32 +14,37 @@ interface TrainingProps {
     region?: string;
     topic?: string;
     trainer?: string;
-    image?: any;
+    image?: { assetUrl?: string; asset?: { _ref?: string; _type?: string } };
     registrationOpen?: boolean;
+    spotsAvailable?: number;
     slug?: { current: string };
   };
 }
 
 export default function TrainingCard({ event }: TrainingProps) {
   const eventDate = event.date ? new Date(event.date) : null;
-  const formattedDate = eventDate 
-    ? eventDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  const formattedDate = eventDate
+    ? eventDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
     : "Date TBD";
 
+  // Use the directly projected URL first; fall back to urlFor if only the ref is present
+  const imageSrc = event.image?.assetUrl
+    ?? (event.image ? (() => { try { return urlFor(event.image as Parameters<typeof urlFor>[0]).url(); } catch { return null; } })() : null);
+
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 flex flex-col md:flex-row group"
-      id={`training-${event.title.toLowerCase().replace(/\s+/g, '-')}`}
+      id={`training-${event.title.toLowerCase().replace(/\s+/g, "-")}`}
     >
       <div className="relative w-full md:w-48 h-48 md:h-auto overflow-hidden bg-gray-50">
-        {event.image ? (
-          <Image 
-            src={urlFor(event.image).url()} 
-            alt={event.title} 
-            fill 
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={event.title}
+            fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
