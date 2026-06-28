@@ -2,14 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ShoppingBag, Users, Leaf, ArrowRight } from "lucide-react";
-
-const stats = [
-  { value: "500+",  label: "Active Farmers" },
-  { value: "12",    label: "Regions" },
-  { value: "200+",  label: "Products" },
-  { value: "50+",   label: "Verified Buyers" },
-];
+import { ShoppingBag, Users, Leaf } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -116,24 +109,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Floating stats card — anchored to bottom of hero */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
-        <div className="mx-auto max-w-[1200px] px-6 pb-0">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="pointer-events-auto bg-white rounded-t-3xl shadow-2xl grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100"
-          >
-            {stats.map((s, i) => (
-              <div key={i} className="flex flex-col items-center justify-center py-5 px-4 text-center">
-                <p className="text-2xl font-bold text-primary font-poppins leading-none mb-1">{s.value}</p>
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{s.label}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
     </section>
   );
 }

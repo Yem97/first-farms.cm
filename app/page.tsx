@@ -119,8 +119,27 @@ export default async function Home() {
       {/* ── HERO ──────────────────────────────────────────────────── */}
       <HeroSection />
 
+      {/* ── STATS CARD — straddles hero / content boundary ─────────── */}
+      <div className="relative z-30 -mt-14">
+        <div className="mx-auto max-w-[1200px] px-4 md:px-8">
+          <div className="bg-white rounded-3xl shadow-2xl grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100 border border-gray-100">
+            {[
+              { value: "500+",  label: "Active Farmers" },
+              { value: "12",    label: "Regions" },
+              { value: "200+",  label: "Products" },
+              { value: "50+",   label: "Verified Buyers" },
+            ].map((s, i) => (
+              <div key={i} className="flex flex-col items-center justify-center py-6 px-4 text-center">
+                <p className="text-2xl md:text-3xl font-bold text-primary font-poppins leading-none mb-1">{s.value}</p>
+                <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* ── ABOUT SNIPPET ─────────────────────────────────────────── */}
-      <section className="pt-24 pb-20 mx-auto px-6 max-w-[1200px]">
+      <section className="pt-20 pb-20 mx-auto px-6 max-w-[1200px]">
         <div className="flex flex-col lg:flex-row items-center gap-16">
 
           {/* Image block */}
