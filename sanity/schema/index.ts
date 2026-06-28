@@ -4,6 +4,7 @@ import testimonial from './testimonial'
 import teamMember from './teamMember'
 import advertPackage from './advertPackage'
 import memberRegistration from './memberRegistration'
+import wellnessProduct from './wellnessProduct'
 
 export const schemaTypes = [
   product,
@@ -12,4 +13,5 @@ export const schemaTypes = [
   teamMember,
   advertPackage,
   memberRegistration,
+  wellnessProduct,
 ]
