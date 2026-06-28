@@ -103,8 +103,8 @@ export default async function EducationPage() {
         
         <div className="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
           {events.length > 0 ? (
-            events.map((event: any) => (
-              <TrainingCard key={event._id} event={event} />
+            events.map((event) => (
+              <TrainingCard key={(event as { _id: string })._id} event={event as Parameters<typeof TrainingCard>[0]['event']} />
             ))
           ) : (
             <div className="text-center py-24 bg-gray-50 rounded-[2.5rem] border-2 border-dashed border-gray-200">

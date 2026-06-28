@@ -42,7 +42,7 @@ export default function Footer() {
               <li><Link href="/membership" className="hover:text-white hover:translate-x-1 transition-all inline-block text-sm">Become a Member</Link></li>
               <li><Link href="/education" className="hover:text-white hover:translate-x-1 transition-all inline-block text-sm">Training Programs</Link></li>
               <li><Link href="/marketplace" className="hover:text-white hover:translate-x-1 transition-all inline-block text-sm">Farmer's Market</Link></li>
-              <li><Link href="/advertise" className="hover:text-white hover:translate-x-1 transition-all inline-block text-sm">Advertise With Us</Link></li>
+              <li><Link href="/services" className="hover:text-white hover:translate-x-1 transition-all inline-block text-sm">Our Services</Link></li>
             </ul>
           </div>
 
