@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 const poppins = Poppins({ weight: ["400", "500", "600", "700"], subsets: ["latin"], variable: "--font-poppins", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "First Farms Cameroon | Empowering Farmers. Feeding Cameroon.",
-  description: "Official website for First Farms Cameroon agricultural cooperative.",
+  title: "Firstfarms Cameroon | Empowering Farmers. Feeding Cameroon.",
+  description: "Official website for Firstfarms Cameroon agricultural cooperative.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

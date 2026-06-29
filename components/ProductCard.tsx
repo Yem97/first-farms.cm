@@ -21,7 +21,7 @@ interface ProductProps {
 export default function ProductCard({ product }: ProductProps) {
   const globalWhatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "237XXXXXXXXX";
   const contactNumber = product.whatsappNumber || globalWhatsapp;
-  const message = encodeURIComponent(`Hello, I'm interested in ${product.name} listed on First Farms Cameroon marketplace.`);
+  const message = encodeURIComponent(`Hello, I'm interested in ${product.name} listed on Firstfarms Cameroon marketplace.`);
 
   return (
     <motion.div 

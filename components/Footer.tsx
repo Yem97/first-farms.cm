@@ -18,7 +18,7 @@ export default function Footer() {
                 <Sprout className="w-6 h-6 text-white" />
               </div>
               <span className="text-xl font-bold font-poppins tracking-tight">
-                First Farms <span className="text-secondary">Cameroon</span>
+                Firstfarms <span className="text-secondary">Cameroon</span>
               </span>
             </Link>
             <p className="text-gray-300 text-sm leading-relaxed max-w-xs">
@@ -74,7 +74,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 text-center text-gray-400 text-xs">
-          <p>© {currentYear} First Farms Cameroon Cooperative. All Rights Reserved.</p>
+          <p>© {currentYear} Firstfarms Cameroon Cooperative. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
@@ -88,7 +88,7 @@ function NewsletterWidget() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const msg = encodeURIComponent(`Hello First Farms! I'd like to subscribe to your WhatsApp updates. My number is ${phone}.`);
+    const msg = encodeURIComponent(`Hello Firstfarms Cameroon! I'd like to subscribe to your WhatsApp updates. My number is ${phone}.`);
     window.open(`https://wa.me/${whatsapp}?text=${msg}`, "_blank");
     setDone(true);
   }

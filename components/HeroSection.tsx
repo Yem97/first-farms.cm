@@ -47,7 +47,7 @@ export default function HeroSection() {
           className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4 flex items-center gap-2"
         >
           <Leaf className="w-3.5 h-3.5" />
-          First Farms Cameroon
+          Firstfarms Cameroon
         </motion.p>
 
         {/* Heading — clamped to fit all content on screen */}

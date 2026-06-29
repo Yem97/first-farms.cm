@@ -36,7 +36,7 @@ export default function Navbar() {
               <Sprout className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold font-poppins text-lg leading-none">
-              <span className="text-primary">First Farms</span>{" "}
+              <span className="text-primary">Firstfarms</span>{" "}
               <span className="text-secondary">Cameroon</span>
             </span>
           </Link>

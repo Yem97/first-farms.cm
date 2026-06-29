@@ -67,7 +67,7 @@ export default async function AboutPage() {
           <div className="w-full lg:w-1/2 space-y-8">
             <h2 className="text-4xl font-bold font-poppins text-primary">Our Story</h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              First Farms Cameroon started in 2018 as a small group of 5 farmers in the Littoral region who wanted to get fairer prices for their plantains. We realized that by combining our harvests, we could reach bigger markets in Douala directly.
+              Firstfarms Cameroon started in 2018 as a small group of 5 farmers in the Littoral region who wanted to get fairer prices for their plantains. We realized that by combining our harvests, we could reach bigger markets in Douala directly.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed">
               Today, we have grown into a multi-regional cooperative spanning over 12 locations across Cameroon, helping hundreds of families achieve economic stability through sustainable agriculture.

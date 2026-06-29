@@ -59,7 +59,7 @@ interface TrainingEvent {
 const fallbackTestimonials: Testimonial[] = [
   {
     _id: "ft1",
-    quote: "Since joining First Farms, I have doubled my income by selling directly to buyers in Douala. No more middlemen taking our profits.",
+    quote: "Since joining Firstfarms, I have doubled my income by selling directly to buyers in Douala. No more middlemen taking our profits.",
     farmerName: "Celestin Bakam",
     region: "Adamaoua",
     localPhoto: "/images/avatars/testimonial-1.svg",
@@ -73,7 +73,7 @@ const fallbackTestimonials: Testimonial[] = [
   },
   {
     _id: "ft3",
-    quote: "First Farms gave me access to tools, storage, and markets I never thought I could reach as a small farmer in the North.",
+    quote: "Firstfarms gave me access to tools, storage, and markets I never thought I could reach as a small farmer in the North.",
     farmerName: "Ibrahim Yaya",
     region: "Nord",
     localPhoto: "/images/avatars/testimonial-3.svg",
@@ -124,7 +124,7 @@ const fallbackEvents: TrainingEvent[] = [
     location: "Bafoussam",
     region: "Ouest",
     topic: "Business Skills",
-    trainer: "First Farms Facilitator",
+    trainer: "Firstfarms Facilitator",
     registrationOpen: false,
     spotsAvailable: 60,
   },
@@ -205,7 +205,7 @@ export default async function Home() {
               Connecting Cameroonian Farmers to Greater Opportunities
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              First Farms Cameroon is more than a cooperative — it is a community of innovators pooling
+              Firstfarms Cameroon is more than a cooperative — it is a community of innovators pooling
               resources, knowledge, and connections to transform Cameroonian agriculture from North to South.
             </p>
             <ul className="space-y-3">
@@ -335,7 +335,7 @@ export default async function Home() {
               const monthYear = eventDate
                 ? eventDate.toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase()
                 : "DATE TBD";
-              const waMsg = encodeURIComponent(`Hello First Farms! I would like to register for: ${event.title}`);
+              const waMsg = encodeURIComponent(`Hello Firstfarms Cameroon! I would like to register for: ${event.title}`);
               const isOpen = event.registrationOpen !== false;
 
               return (

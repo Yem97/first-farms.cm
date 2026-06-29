@@ -51,7 +51,7 @@ const fallbackEvents: TrainingEvent[] = [
     location: "Bafoussam",
     region: "Ouest",
     topic: "Business Skills",
-    trainer: "First Farms Facilitator",
+    trainer: "Firstfarms Facilitator",
     registrationOpen: false,
     spotsAvailable: 60,
   },
@@ -105,7 +105,7 @@ export default async function EducationPage() {
             <div className="p-6 bg-secondary/10 rounded-2xl flex gap-4">
               <Info className="w-6 h-6 text-secondary shrink-0" />
               <p className="text-accent text-sm font-medium">
-                Members of the First Farms Cameroon Cooperative get 100% free access to all physical and digital training materials.
+                Members of the Firstfarms Cameroon Cooperative get 100% free access to all physical and digital training materials.
               </p>
             </div>
           </div>

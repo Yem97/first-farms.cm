@@ -6,7 +6,7 @@ import FirstFarmsStudioLogo from './components/StudioLogo'
 
 export default defineConfig({
   name: 'default',
-  title: 'First Farms Cameroon',
+  title: 'Firstfarms Cameroon',
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   basePath: '/studio',
