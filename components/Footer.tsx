@@ -17,12 +17,17 @@ export default function Footer() {
               <div className="bg-primary p-1.5 rounded-lg">
                 <Sprout className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold font-poppins tracking-tight">
-                Firstfarms <span className="text-secondary">Cameroon</span>
-              </span>
+              <div className="flex flex-col leading-[1.2]">
+                <span className="text-xl font-bold font-poppins tracking-tight">
+                  AgriTech <span className="text-secondary">Hub</span>
+                </span>
+                <span className="text-[10px] text-gray-400 tracking-wide">
+                  AgriTech &amp; Wildlife Incubation Hub
+                </span>
+              </div>
             </Link>
             <p className="text-gray-300 text-sm leading-relaxed max-w-xs">
-              Empowering Cameroonian farmers through cooperation, education, and direct market access. Sustainable agriculture for a better future.
+              Combining Artificial Intelligence with field data to diagnose, monitor, and optimize agricultural and natural systems across Cameroon and beyond.
             </p>
             <div className="flex gap-4">
               <Link href="#" className="p-2 bg-white/10 rounded-full hover:bg-secondary transition-colors" aria-label="Facebook">
@@ -74,7 +79,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 text-center text-gray-400 text-xs">
-          <p>© {currentYear} Firstfarms Cameroon Cooperative. All Rights Reserved.</p>
+          <p>© {currentYear} AgriTech &amp; Wildlife Incubation Hub. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
@@ -88,7 +93,7 @@ function NewsletterWidget() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const msg = encodeURIComponent(`Hello Firstfarms Cameroon! I'd like to subscribe to your WhatsApp updates. My number is ${phone}.`);
+    const msg = encodeURIComponent(`Hello AgriTech Hub! I'd like to subscribe to your WhatsApp updates. My number is ${phone}.`);
     window.open(`https://wa.me/${whatsapp}?text=${msg}`, "_blank");
     setDone(true);
   }

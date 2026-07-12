@@ -6,6 +6,7 @@ import ProductCard from "@/components/ProductCard";
 import {
   Users, ShoppingBag, GraduationCap, ChevronRight, Quote,
   CheckCircle, ArrowRight, Leaf, MapPin, User, MessageCircle,
+  Brain, Activity, Droplets, TrendingUp, Mountain,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -59,7 +60,7 @@ interface TrainingEvent {
 const fallbackTestimonials: Testimonial[] = [
   {
     _id: "ft1",
-    quote: "Since joining Firstfarms, I have doubled my income by selling directly to buyers in Douala. No more middlemen taking our profits.",
+    quote: "Since joining AgriTech Hub, I have doubled my income by selling directly to buyers in Douala. No more middlemen taking our profits.",
     farmerName: "Celestin Bakam",
     region: "Adamaoua",
     localPhoto: "/images/avatars/testimonial-1.svg",
@@ -73,7 +74,7 @@ const fallbackTestimonials: Testimonial[] = [
   },
   {
     _id: "ft3",
-    quote: "Firstfarms gave me access to tools, storage, and markets I never thought I could reach as a small farmer in the North.",
+    quote: "AgriTech Hub gave me access to tools, storage, and markets I never thought I could reach as a small farmer in the North.",
     farmerName: "Ibrahim Yaya",
     region: "Nord",
     localPhoto: "/images/avatars/testimonial-3.svg",
@@ -88,10 +89,12 @@ const fallbackProducts: Product[] = [
 ];
 
 const fallbackTeam: TeamMember[] = [
-  { _id: "tm1", name: "Amadou Nkwemo",     role: "Co-Founder & CEO",      localPhoto: "/images/avatars/team-1.svg" },
-  { _id: "tm2", name: "Amina Tchaptchet",  role: "Head of Operations",    localPhoto: "/images/avatars/team-2.svg" },
-  { _id: "tm3", name: "Jean-Paul Mbarga",  role: "Agricultural Director", localPhoto: "/images/avatars/team-3.svg" },
-  { _id: "tm4", name: "Fatima Aboubakar", role: "Community Liaison",     localPhoto: "/images/avatars/team-4.svg" },
+  { _id: "tm1", name: "TOGUÉ TOGUÉ Laurent Ghislain", role: "Chairperson — Board of Directors",            localPhoto: "/images/avatars/team-1.svg" },
+  { _id: "tm2", name: "Tita Pascline Wokongwo",        role: "Asst. Secretary / Financial Secretary",       localPhoto: "/images/avatars/team-2.svg" },
+  { _id: "tm3", name: "Siani Tomaha André",             role: "Member — Board of Directors",                 localPhoto: "/images/avatars/team-3.svg" },
+  { _id: "tm4", name: "Walter Ngwa Shu",                role: "Chairperson / Asst. Treasurer — Supervisory", localPhoto: "/images/avatars/team-4.svg" },
+  { _id: "tm5", name: "Senge Grace Ebong",              role: "Secretary / Communication — Supervisory",     localPhoto: "/images/avatars/team-5.svg" },
+  { _id: "tm6", name: "Ndip Prestile Anne",             role: "Member — Supervisory Board",                  localPhoto: "/images/avatars/team-6.svg" },
 ];
 
 const fallbackEvents: TrainingEvent[] = [
@@ -124,7 +127,7 @@ const fallbackEvents: TrainingEvent[] = [
     location: "Bafoussam",
     region: "Ouest",
     topic: "Business Skills",
-    trainer: "Firstfarms Facilitator",
+    trainer: "AgriTech Hub Facilitator",
     registrationOpen: false,
     spotsAvailable: 60,
   },
@@ -186,33 +189,34 @@ export default async function Home() {
             {/* Floating quote card */}
             <div className="absolute -bottom-6 -right-4 md:-right-8 bg-secondary px-7 py-5 rounded-2xl shadow-xl hidden md:block max-w-[220px]">
               <p className="text-accent font-bold text-sm leading-snug">
-                &ldquo;Stronger Together, Producing Excellence.&rdquo;
+                &ldquo;Intelligence meets Agriculture.&rdquo;
               </p>
             </div>
             {/* Green accent badge */}
             <div className="absolute -top-4 -left-4 bg-primary text-white px-4 py-2 rounded-xl shadow-lg hidden md:flex items-center gap-2">
-              <Leaf className="w-4 h-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">Est. 2020</span>
+              <Brain className="w-4 h-4" />
+              <span className="text-xs font-bold uppercase tracking-wider">AgriExpert AI</span>
             </div>
           </div>
 
           {/* Text */}
           <div className="w-full lg:w-1/2 space-y-6">
             <span className="inline-block text-primary font-bold uppercase tracking-widest text-xs px-3 py-1.5 bg-primary/10 rounded-full">
-              Our Vision
+              Our Mission
             </span>
             <h2 className="text-3xl md:text-4xl font-bold font-poppins text-primary leading-tight">
-              Connecting Cameroonian Farmers to Greater Opportunities
+              AI-Powered Diagnosis for Every Agro-Ecosystem
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Firstfarms Cameroon is more than a cooperative — it is a community of innovators pooling
-              resources, knowledge, and connections to transform Cameroonian agriculture from North to South.
+              AgriTech &amp; Wildlife Incubation Hub for Digital Innovation harnesses Artificial
+              Intelligence to deliver integrated diagnosis across agricultural and natural systems —
+              empowering farmers, wildlife managers, and agribusiness operators with precision tools.
             </p>
             <ul className="space-y-3">
               {[
-                "Direct market access — no middlemen",
-                "Professional training in modern farming",
-                "Collective strength across 10 regions",
+                "AI-powered plant disease identification and treatment",
+                "Animal pathology detection across livestock and wildlife",
+                "Water quality analysis for fisheries and aquaculture",
               ].map((point, i) => (
                 <li key={i} className="flex items-center gap-3 text-gray-700">
                   <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
@@ -227,6 +231,50 @@ export default async function Home() {
               Discover Our Full Story
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── AGRIEXPERT AI CAPABILITIES ────────────────────────────── */}
+      <section className="py-20 bg-primary text-white">
+        <div className="mx-auto px-6 max-w-[1200px]">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 text-secondary font-bold uppercase tracking-widest text-xs px-3 py-1.5 bg-secondary/20 rounded-full mb-4">
+              <Brain className="w-3.5 h-3.5" />
+              Flagship Platform
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-3">AgriExpert AI</h2>
+            <p className="text-secondary font-semibold text-sm uppercase tracking-[0.18em] mb-5">
+              Intelligent Agro-Ecosystem Diagnosis
+            </p>
+            <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              An intelligent tool that combines Artificial Intelligence with field data to provide an
+              integrated diagnosis of agricultural and natural systems — guiding treatment decisions
+              and sustainable management in a holistic Agro ecosystem approach.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+            {[
+              { icon: Leaf,       title: "Plant Diseases",          desc: "Identify and diagnose crop diseases with AI-powered image analysis and treatment guidance." },
+              { icon: Activity,   title: "Animal Pathologies",      desc: "Detect health conditions in livestock and wildlife with precision diagnostic tools." },
+              { icon: Droplets,   title: "Water Quality",           desc: "Analyse water parameters for fisheries and aquaculture operations in real time." },
+              { icon: TrendingUp, title: "Livestock Optimization",  desc: "Data-driven performance insights for livestock industries and farm management." },
+              { icon: Mountain,   title: "Forest & Wildlife",       desc: "Monitor forest ecosystems and wildlife health to guide sustainable land management." },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 hover:bg-white/15 transition-colors">
+                <div className="w-11 h-11 bg-secondary/20 rounded-xl flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-secondary" />
+                </div>
+                <h3 className="font-bold text-white font-poppins text-sm mb-2">{title}</h3>
+                <p className="text-gray-400 text-xs leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <a href="/services" className="inline-flex items-center gap-2 bg-secondary text-accent font-bold px-8 py-3.5 rounded-xl text-sm hover:bg-secondary/90 transition-all">
+              Learn More About AgriExpert AI
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </section>
@@ -335,7 +383,7 @@ export default async function Home() {
               const monthYear = eventDate
                 ? eventDate.toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase()
                 : "DATE TBD";
-              const waMsg = encodeURIComponent(`Hello Firstfarms Cameroon! I would like to register for: ${event.title}`);
+              const waMsg = encodeURIComponent(`Hello AgriTech Hub! I would like to register for: ${event.title}`);
               const isOpen = event.registrationOpen !== false;
 
               return (
@@ -409,16 +457,16 @@ export default async function Home() {
       <section className="py-20 mx-auto px-6 max-w-[1200px]">
         <div className="text-center mb-14">
           <span className="inline-block text-secondary font-bold uppercase tracking-widest text-xs px-3 py-1.5 bg-secondary/10 rounded-full mb-4">
-            The People Behind It
+            Leadership
           </span>
           <h2 className="text-3xl md:text-4xl font-bold font-poppins text-primary">
-            Meet the Team
+            Board &amp; Supervisory
           </h2>
           <p className="text-gray-500 mt-3 max-w-xl mx-auto">
-            Dedicated professionals driving the cooperative's mission across Cameroon.
+            Board of Directors and Supervisory Board of Firstfarms Digital Cooperative Society.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayTeam.map((member) => {
             const photoSrc = member.localPhoto
               ? member.localPhoto
@@ -500,10 +548,10 @@ export default async function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-white">
               <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-3">
-                Ready to Join the Cooperative?
+                Ready to Harness AgriExpert AI?
               </h2>
               <p className="text-gray-300 text-lg">
-                Become a member today and access markets, training, and community support.
+                Join Firstfarms Digital Cooperative Society and access AI-powered farm diagnosis, training programs, and market connections.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">

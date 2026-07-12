@@ -15,12 +15,12 @@ interface TeamMember {
 }
 
 const fallbackTeam: TeamMember[] = [
-  { _id: 'ft1', name: 'Amadou Nkwemo', role: 'Co-Founder & CEO', localPhoto: '/images/avatars/team-1.svg' },
-  { _id: 'ft2', name: 'Amina Tchaptchet', role: 'Head of Operations', localPhoto: '/images/avatars/team-2.svg' },
-  { _id: 'ft3', name: 'Jean-Paul Mbarga', role: 'Agricultural Director', localPhoto: '/images/avatars/team-3.svg' },
-  { _id: 'ft4', name: 'Fatima Aboubakar', role: 'Community Liaison', localPhoto: '/images/avatars/team-4.svg' },
-  { _id: 'ft5', name: 'Emmanuel Essomba', role: 'Technology Lead', localPhoto: '/images/avatars/team-5.svg' },
-  { _id: 'ft6', name: 'Marie-Claire Fouda', role: 'Finance Officer', localPhoto: '/images/avatars/team-6.svg' },
+  { _id: 'ft1', name: 'TOGUÉ TOGUÉ Laurent Ghislain', role: 'Chairperson — Board of Directors',             localPhoto: '/images/avatars/team-1.svg' },
+  { _id: 'ft2', name: 'Tita Pascline Wokongwo',        role: 'Asst. Secretary / Financial Secretary',        localPhoto: '/images/avatars/team-2.svg' },
+  { _id: 'ft3', name: 'Siani Tomaha André',             role: 'Member — Board of Directors',                  localPhoto: '/images/avatars/team-3.svg' },
+  { _id: 'ft4', name: 'Walter Ngwa Shu',                role: 'Chairperson / Asst. Treasurer — Supervisory',  localPhoto: '/images/avatars/team-4.svg' },
+  { _id: 'ft5', name: 'Senge Grace Ebong',              role: 'Secretary / Communication — Supervisory',      localPhoto: '/images/avatars/team-5.svg' },
+  { _id: 'ft6', name: 'Ndip Prestile Anne',             role: 'Member — Supervisory Board',                   localPhoto: '/images/avatars/team-6.svg' },
 ];
 
 const galleryImages = [
@@ -54,9 +54,9 @@ export default async function AboutPage() {
       {/* Header */}
       <section className="bg-primary text-white py-24">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold font-poppins mb-6">Our Roots &amp; Vision</h1>
+          <h1 className="text-4xl md:text-6xl font-bold font-poppins mb-6">Our Story &amp; Vision</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Founded with the belief that Cameroon&apos;s strength lies in its fertile soil and the hands that work it.
+            Combining Artificial Intelligence with field expertise to build the most comprehensive agro-ecosystem diagnostic platform in Cameroon.
           </p>
         </div>
       </section>
@@ -67,19 +67,19 @@ export default async function AboutPage() {
           <div className="w-full lg:w-1/2 space-y-8">
             <h2 className="text-4xl font-bold font-poppins text-primary">Our Story</h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Firstfarms Cameroon started in 2018 as a small group of 5 farmers in the Littoral region who wanted to get fairer prices for their plantains. We realized that by combining our harvests, we could reach bigger markets in Douala directly.
+              Firstfarms Digital Cooperative Society was established by agricultural innovators and technology pioneers who recognized that Artificial Intelligence could fundamentally transform how African farmers diagnose, manage, and optimize their agro-ecosystems.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Today, we have grown into a multi-regional cooperative spanning over 12 locations across Cameroon, helping hundreds of families achieve economic stability through sustainable agriculture.
+              Operating as the AgriTech &amp; Wildlife Incubation Hub for Digital Innovation, our flagship platform — AgriExpert AI — delivers integrated diagnosis across plant diseases, animal pathologies, water quality, livestock industries, and forest ecosystems in one unified solution.
             </p>
             <div className="grid grid-cols-2 gap-8 pt-8">
               <div>
-                <p className="text-4xl font-bold text-secondary mb-2">2018</p>
-                <p className="text-sm font-bold uppercase tracking-widest text-primary">Founded</p>
+                <p className="text-4xl font-bold text-secondary mb-2">10+</p>
+                <p className="text-sm font-bold uppercase tracking-widest text-primary">Regions</p>
               </div>
               <div>
-                <p className="text-4xl font-bold text-secondary mb-2">12+</p>
-                <p className="text-sm font-bold uppercase tracking-widest text-primary">Regions</p>
+                <p className="text-4xl font-bold text-secondary mb-2">5</p>
+                <p className="text-sm font-bold uppercase tracking-widest text-primary">AI Modules</p>
               </div>
             </div>
           </div>
@@ -107,13 +107,13 @@ export default async function AboutPage() {
           <div className="bg-white p-12 rounded-[2rem] shadow-sm border border-gray-100">
             <h3 className="text-2xl font-bold font-poppins text-primary mb-6">Our Mission</h3>
             <p className="text-gray-600 leading-relaxed text-lg italic">
-              &ldquo;To uplift the Cameroonian farmer by providing a transparent, efficient, and educational ecosystem that guarantees food security and prosperity for our nation.&rdquo;
+              &ldquo;To empower every farmer, wildlife manager, and agribusiness operator with AI-powered tools for precise diagnosis, sustainable management, and data-driven decision making across entire agro-ecosystems.&rdquo;
             </p>
           </div>
           <div className="bg-white p-12 rounded-[2rem] shadow-sm border border-gray-100">
             <h3 className="text-2xl font-bold font-poppins text-primary mb-6">Our Vision</h3>
             <p className="text-gray-600 leading-relaxed text-lg italic">
-              &ldquo;To become the leading model of agricultural cooperation in Sub-Saharan Africa, recognized for quality, sustainability, and communal wealth creation.&rdquo;
+              &ldquo;To become the leading Agro-Ecosystem AI platform in Sub-Saharan Africa — recognized for diagnostic accuracy, sustainability, and its role in building food security and environmental resilience.&rdquo;
             </p>
           </div>
         </div>
@@ -141,39 +141,72 @@ export default async function AboutPage() {
       <section className="py-24 bg-accent text-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold font-poppins">Meet the Founders</h2>
-            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">The dedicated team working behind the scenes to support our farmers every day.</p>
-            {teamMembers.length === 0 && (
-              <p className="text-xs text-secondary/60 mt-2 font-medium">
-                Placeholder profiles — replace with real team photos via the Sanity Studio.
-              </p>
-            )}
+            <h2 className="text-3xl md:text-4xl font-bold font-poppins">Our Leadership</h2>
+            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+              Board of Directors and Supervisory Board of Firstfarms Digital Cooperative Society.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
-            {displayTeam.map((member) => {
-              const photoSrc = member.localPhoto
-                ? member.localPhoto
-                : member.photo
-                ? urlFor(member.photo).url()
-                : null;
-
-              return (
-                <div key={member._id} className="text-center group">
-                  <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500">
-                    {photoSrc ? (
-                      <Image src={photoSrc} alt={member.name} fill className="object-cover" />
-                    ) : (
-                      <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                        <Sprout className="w-12 h-12 text-gray-700" />
-                      </div>
-                    )}
+          {/* Board of Directors */}
+          <div className="mb-16">
+            <p className="text-center text-xs font-bold uppercase tracking-[0.28em] text-secondary mb-10">
+              Board of Directors
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+              {displayTeam.slice(0, 3).map((member) => {
+                const photoSrc = member.localPhoto
+                  ? member.localPhoto
+                  : member.photo
+                  ? urlFor(member.photo).url()
+                  : null;
+                return (
+                  <div key={member._id} className="text-center group">
+                    <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500">
+                      {photoSrc ? (
+                        <Image src={photoSrc} alt={member.name} fill className="object-cover" />
+                      ) : (
+                        <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                          <Sprout className="w-12 h-12 text-gray-700" />
+                        </div>
+                      )}
+                    </div>
+                    <h4 className="text-lg font-bold font-poppins">{member.name}</h4>
+                    <p className="text-secondary text-xs font-bold uppercase tracking-widest mt-1">{member.role}</p>
                   </div>
-                  <h4 className="text-lg font-bold font-poppins">{member.name}</h4>
-                  <p className="text-secondary text-xs font-bold uppercase tracking-widest mt-1">{member.role}</p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Supervisory Board */}
+          <div>
+            <p className="text-center text-xs font-bold uppercase tracking-[0.28em] text-secondary mb-10">
+              Supervisory Board
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+              {displayTeam.slice(3).map((member) => {
+                const photoSrc = member.localPhoto
+                  ? member.localPhoto
+                  : member.photo
+                  ? urlFor(member.photo).url()
+                  : null;
+                return (
+                  <div key={member._id} className="text-center group">
+                    <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500">
+                      {photoSrc ? (
+                        <Image src={photoSrc} alt={member.name} fill className="object-cover" />
+                      ) : (
+                        <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                          <Sprout className="w-12 h-12 text-gray-700" />
+                        </div>
+                      )}
+                    </div>
+                    <h4 className="text-lg font-bold font-poppins">{member.name}</h4>
+                    <p className="text-secondary text-xs font-bold uppercase tracking-widest mt-1">{member.role}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

@@ -28,7 +28,7 @@ export default function AdvertiseForm({ packages = [] }: AdvertiseFormProps) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const msg = encodeURIComponent(
-      `*Advertisement Inquiry — Firstfarms Cameroon*\n\n` +
+      `*Advertisement Inquiry — AgriTech Hub*\n\n` +
       `👤 Contact: ${form.name}\n` +
       `🏢 Business: ${form.business}\n` +
       `📧 Email: ${form.email}\n` +

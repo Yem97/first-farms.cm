@@ -35,10 +35,15 @@ export default function Navbar() {
             <div className="bg-primary p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-200 shadow-sm">
               <Sprout className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold font-poppins text-lg leading-none">
-              <span className="text-primary">Firstfarms</span>{" "}
-              <span className="text-secondary">Cameroon</span>
-            </span>
+            <div className="flex flex-col leading-[1.2]">
+              <span className="font-bold font-poppins text-sm leading-tight">
+                <span className="text-primary">AgriTech</span>
+                <span className="text-gray-800"> Hub</span>
+              </span>
+              <span className="text-[9px] font-semibold text-secondary uppercase tracking-[0.14em]">
+                Digital Innovation
+              </span>
+            </div>
           </Link>
 
           {/* Desktop links */}
