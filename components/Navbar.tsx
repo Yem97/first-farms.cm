@@ -26,17 +26,23 @@ export default function Navbar() {
   useEffect(() => { setIsOpen(false); }, [pathname]);
 
   useEffect(() => {
-    const supabase = createClient();
     let mounted = true;
-    supabase.auth.getUser().then(({ data }) => {
-      if (mounted) setUser(data.user);
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
+    let unsub: (() => void) | undefined;
+    try {
+      const supabase = createClient();
+      supabase.auth.getUser().then(({ data }) => {
+        if (mounted) setUser(data.user);
+      });
+      const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+        setUser(session?.user ?? null);
+      });
+      unsub = () => sub.subscription.unsubscribe();
+    } catch {
+      // Supabase not configured — nav simply shows the logged-out state.
+    }
     return () => {
       mounted = false;
-      sub.subscription.unsubscribe();
+      unsub?.();
     };
   }, []);
 
