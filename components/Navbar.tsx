@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sprout } from "lucide-react";
+import { Menu, X, Sprout, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import type { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 
 const navLinks = [
   { name: "Home",        href: "/" },
@@ -18,9 +20,25 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const pathname = usePathname();
 
   useEffect(() => { setIsOpen(false); }, [pathname]);
+
+  useEffect(() => {
+    const supabase = createClient();
+    let mounted = true;
+    supabase.auth.getUser().then(({ data }) => {
+      if (mounted) setUser(data.user);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => {
+      mounted = false;
+      sub.subscription.unsubscribe();
+    };
+  }, []);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -66,14 +84,32 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="hidden lg:block">
-            <Link
-              href="/membership"
-              className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:shadow-lg hover:shadow-primary/20 active:scale-95"
-            >
-              Join Now
-            </Link>
+          {/* CTA — auth aware */}
+          <div className="hidden lg:flex items-center gap-4">
+            {user ? (
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:shadow-lg hover:shadow-primary/20 active:scale-95"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-sm font-bold text-gray-600 hover:text-primary transition-colors"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/signup"
+                  className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:shadow-lg hover:shadow-primary/20 active:scale-95"
+                >
+                  Join Now
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile toggle */}
@@ -113,13 +149,34 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Link
-                href="/membership"
-                onClick={() => setIsOpen(false)}
-                className="mt-3 bg-primary text-white text-center py-3.5 rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-sm"
-              >
-                Join the Cooperative
-              </Link>
+
+              {user ? (
+                <Link
+                  href="/dashboard"
+                  onClick={() => setIsOpen(false)}
+                  className="mt-3 bg-primary text-white text-center py-3.5 rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-sm flex items-center justify-center gap-2"
+                >
+                  <LayoutDashboard className="w-4 h-4" />
+                  My Dashboard
+                </Link>
+              ) : (
+                <div className="mt-3 flex flex-col gap-2">
+                  <Link
+                    href="/login"
+                    onClick={() => setIsOpen(false)}
+                    className="border-2 border-gray-200 text-gray-700 text-center py-3 rounded-xl font-bold hover:border-primary hover:text-primary transition-colors"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/signup"
+                    onClick={() => setIsOpen(false)}
+                    className="bg-primary text-white text-center py-3.5 rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-sm"
+                  >
+                    Join the Cooperative
+                  </Link>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
