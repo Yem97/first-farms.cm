@@ -14,7 +14,7 @@ export default async function NewListingPage() {
   if (!user) redirect("/login");
 
   return (
-    <div className="min-h-[85vh] bg-gray-50 py-16 px-4">
+    <div className="min-h-[85vh] bg-gray-50 pt-28 pb-16 px-4">
       <div className="max-w-2xl mx-auto">
         <Link href="/dashboard" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" />

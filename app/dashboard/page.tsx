@@ -44,7 +44,7 @@ export default async function DashboardPage({
     searchParams.deleted ? "Listing deleted." : null;
 
   return (
-    <div className="min-h-[85vh] bg-gray-50 py-16 px-4">
+    <div className="min-h-[85vh] bg-gray-50 pt-28 pb-16 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
