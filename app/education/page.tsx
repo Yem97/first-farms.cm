@@ -1,7 +1,7 @@
-import { client } from "@/sanity/lib/client";
-import { trainingEventsQuery } from "@/sanity/lib/queries";
+import { createClient } from "@/lib/supabase/server";
+import type { TrainingEvent as DbTrainingEvent } from "@/lib/types";
 import TrainingCard from "@/components/TrainingCard";
-import { BookOpen, Leaf, BarChart3, Database, Smartphone, Info } from "lucide-react";
+import { BookOpen, Leaf, BarChart3, Database, Smartphone, Info, CalendarDays } from "lucide-react";
 import Image from "next/image";
 import TrainingInterestForm from "@/components/TrainingInterestForm";
 
@@ -18,44 +18,25 @@ interface TrainingEvent {
   registrationOpen?: boolean;
   spotsAvailable?: number;
   slug?: { current: string };
-  image?: { asset: { _ref: string; _type: string } };
+  image?: { assetUrl?: string; asset?: { _ref?: string; _type?: string } };
 }
 
-const fallbackEvents: TrainingEvent[] = [
-  {
-    _id: "fe1",
-    title: "Soil Health & Organic Fertilisation Workshop",
-    date: "2026-07-15T09:00:00Z",
-    location: "Douala",
-    region: "Littoral",
-    topic: "Soil Management",
-    trainer: "Dr. Emmanuel Bih",
-    registrationOpen: true,
-    spotsAvailable: 40,
-  },
-  {
-    _id: "fe2",
-    title: "Post-Harvest Handling & Storage Techniques",
-    date: "2026-07-28T09:00:00Z",
-    location: "Yaoundé",
-    region: "Centre",
-    topic: "Post-Harvest",
-    trainer: "Mme. Céline Ateba",
-    registrationOpen: true,
-    spotsAvailable: 35,
-  },
-  {
-    _id: "fe3",
-    title: "Digital Market Access for Cooperative Members",
-    date: "2026-08-10T09:00:00Z",
-    location: "Bafoussam",
-    region: "Ouest",
-    topic: "Business Skills",
-    trainer: "Firstfarms Facilitator",
-    registrationOpen: false,
-    spotsAvailable: 60,
-  },
-];
+// Map a Supabase training_events row to the shape TrainingCard renders.
+function mapEventRow(e: DbTrainingEvent): TrainingEvent {
+  return {
+    _id: e.id,
+    title: e.title,
+    date: e.event_date ?? undefined,
+    location: e.location ?? undefined,
+    region: e.region ?? undefined,
+    topic: e.topic ?? undefined,
+    trainer: e.trainer ?? undefined,
+    registrationOpen: e.registration_open,
+    spotsAvailable: e.spots_available ?? undefined,
+    slug: e.slug ? { current: e.slug } : undefined,
+    image: e.image_url ? { assetUrl: e.image_url } : undefined,
+  };
+}
 
 const categories = [
   { title: "Soil Management",  desc: "Understanding soil health, pH balance, and organic fertilization.",            icon: Leaf        },
@@ -66,15 +47,19 @@ const categories = [
 ];
 
 export default async function EducationPage() {
-  let events: TrainingEvent[] = [];
+  // Workshops come from Supabase (posted via /admin/events).
+  // Empty until an admin adds real events — no placeholder sessions.
+  let displayEvents: TrainingEvent[] = [];
   try {
-    events = await client.fetch(trainingEventsQuery);
+    const supabase = createClient();
+    const { data } = await supabase
+      .from("training_events")
+      .select("*")
+      .order("event_date", { ascending: true, nullsFirst: false });
+    displayEvents = ((data ?? []) as DbTrainingEvent[]).map(mapEventRow);
   } catch {
-    // Sanity not yet configured — fallback events used below
+    // Supabase not configured — section stays empty
   }
-
-  const displayEvents = events.length > 0 ? events : fallbackEvents;
-  const usingFallback  = events.length === 0;
 
   return (
     <div className="pt-20">
@@ -150,22 +135,21 @@ export default async function EducationPage() {
         <div className="text-center mb-4">
           <h2 className="text-3xl font-bold font-poppins text-primary">Upcoming Workshops</h2>
         </div>
-        <p className="text-center text-gray-500 mb-4">Physical and virtual sessions across Cameroon.</p>
-        {usingFallback && (
-          <p className="text-center text-xs text-secondary font-semibold uppercase tracking-widest mb-12">
-            Sample schedule. Real sessions are added by an administrator.
-          </p>
-        )}
-        {!usingFallback && <div className="mb-12" />}
+        <p className="text-center text-gray-500 mb-12">Physical and virtual sessions across Cameroon.</p>
 
-        <div className="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
-          {displayEvents.map((event) => (
-            <TrainingCard
-              key={event._id}
-              event={event}
-            />
-          ))}
-        </div>
+        {displayEvents.length === 0 ? (
+          <div className="max-w-5xl mx-auto bg-white rounded-3xl border border-gray-100 shadow-sm py-16 px-6 text-center">
+            <CalendarDays className="w-10 h-10 mx-auto mb-4 text-gray-300" />
+            <p className="font-bold font-poppins text-primary">No workshops scheduled yet</p>
+            <p className="text-gray-500 text-sm mt-1">Check back soon. New training sessions are added regularly.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
+            {displayEvents.map((event) => (
+              <TrainingCard key={event._id} event={event} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ── PROGRAM IMPACT ──────────────────────────────────────── */}

@@ -1,12 +1,14 @@
 import { client } from "@/sanity/lib/client";
-import { featuredProductsQuery, upcomingTrainingsQuery, testimonialsQuery, teamMembersQuery } from "@/sanity/lib/queries";
+import { featuredProductsQuery, testimonialsQuery, teamMembersQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { createClient } from "@/lib/supabase/server";
+import type { TrainingEvent as DbTrainingEvent } from "@/lib/types";
 import HeroSection from "@/components/HeroSection";
 import ProductCard from "@/components/ProductCard";
 import {
   Users, ShoppingBag, GraduationCap, ChevronRight, Quote,
   CheckCircle, ArrowRight, Leaf, MapPin, User, MessageCircle,
-  Brain, Activity, Droplets, TrendingUp, Mountain,
+  Brain, Activity, Droplets, TrendingUp, Mountain, CalendarDays,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -97,41 +99,21 @@ const fallbackTeam: TeamMember[] = [
   { _id: "tm6", name: "Ndip Prestile Anne",             role: "Member, Supervisory Board",                   localPhoto: "/images/avatars/team-6.svg" },
 ];
 
-const fallbackEvents: TrainingEvent[] = [
-  {
-    _id: "fe1",
-    title: "Soil Health & Organic Fertilisation",
-    date: "2026-07-15T09:00:00Z",
-    location: "Douala",
-    region: "Littoral",
-    topic: "Soil Management",
-    trainer: "Dr. Emmanuel Bih",
-    registrationOpen: true,
-    spotsAvailable: 40,
-  },
-  {
-    _id: "fe2",
-    title: "Post-Harvest Handling & Storage Techniques",
-    date: "2026-07-28T09:00:00Z",
-    location: "Yaoundé",
-    region: "Centre",
-    topic: "Post-Harvest",
-    trainer: "Mme. Céline Ateba",
-    registrationOpen: true,
-    spotsAvailable: 35,
-  },
-  {
-    _id: "fe3",
-    title: "Digital Market Access for Cooperative Members",
-    date: "2026-08-10T09:00:00Z",
-    location: "Bafoussam",
-    region: "Ouest",
-    topic: "Business Skills",
-    trainer: "Firstfarms Facilitator",
-    registrationOpen: false,
-    spotsAvailable: 60,
-  },
-];
+// Map a Supabase training_events row to the shape the cards render.
+function mapEventRow(e: DbTrainingEvent): TrainingEvent {
+  return {
+    _id: e.id,
+    title: e.title,
+    date: e.event_date ?? undefined,
+    location: e.location ?? undefined,
+    region: e.region ?? undefined,
+    topic: e.topic ?? undefined,
+    trainer: e.trainer ?? undefined,
+    registrationOpen: e.registration_open,
+    spotsAvailable: e.spots_available ?? undefined,
+    slug: e.slug ? { current: e.slug } : undefined,
+  };
+}
 
 const partners = [
   { name: "AgroTech Littoral", initial: "AT", color: "#1B5E20" },
@@ -145,14 +127,12 @@ const partners = [
 /* ── Page ────────────────────────────────────────────────────────── */
 export default async function Home() {
   let featuredProducts: Product[]     = [];
-  let upcomingTrainings: TrainingEvent[] = [];
   let testimonials: Testimonial[]     = [];
   let teamMembers: TeamMember[]       = [];
 
   try {
-    [featuredProducts, upcomingTrainings, testimonials, teamMembers] = await Promise.all([
+    [featuredProducts, testimonials, teamMembers] = await Promise.all([
       client.fetch(featuredProductsQuery),
-      client.fetch(upcomingTrainingsQuery),
       client.fetch(testimonialsQuery),
       client.fetch(teamMembersQuery),
     ]);
@@ -160,10 +140,24 @@ export default async function Home() {
     // Sanity not configured — fallback content used
   }
 
+  // Upcoming workshops come from Supabase (posted via /admin/events).
+  // Empty until an admin adds real events — no placeholder sessions.
+  let displayEvents: TrainingEvent[] = [];
+  try {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from("training_events")
+      .select("*")
+      .order("event_date", { ascending: true, nullsFirst: false })
+      .limit(3);
+    displayEvents = ((data ?? []) as DbTrainingEvent[]).map(mapEventRow);
+  } catch {
+    // Supabase not configured — section stays empty
+  }
+
   const displayProducts     = featuredProducts.length    > 0 ? featuredProducts    : fallbackProducts;
   const displayTestimonials = testimonials.length         > 0 ? testimonials         : fallbackTestimonials;
   const displayTeam         = teamMembers.length          > 0 ? teamMembers          : fallbackTeam;
-  const displayEvents       = upcomingTrainings.length    > 0 ? upcomingTrainings    : fallbackEvents;
   const waNumber            = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "237XXXXXXXXX";
 
   return (
@@ -363,9 +357,9 @@ export default async function Home() {
                 Upcoming Workshops
               </h2>
               <p className="text-gray-500 mt-2 text-sm">
-                {upcomingTrainings.length > 0
-                  ? `${upcomingTrainings.length} session${upcomingTrainings.length > 1 ? "s" : ""} open. Register your spot today`
-                  : "Sessions across all 10 regions of Cameroon"}
+                {displayEvents.length > 0
+                  ? `${displayEvents.length} session${displayEvents.length > 1 ? "s" : ""} coming up. Register your spot today.`
+                  : "New workshops will be announced here soon."}
               </p>
             </div>
             <Link
@@ -376,6 +370,13 @@ export default async function Home() {
             </Link>
           </div>
 
+          {displayEvents.length === 0 ? (
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm py-16 px-6 text-center">
+              <CalendarDays className="w-10 h-10 mx-auto mb-4 text-gray-300" />
+              <p className="font-bold font-poppins text-primary">No workshops scheduled yet</p>
+              <p className="text-gray-500 text-sm mt-1">Check back soon. New training sessions are added regularly.</p>
+            </div>
+          ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {displayEvents.map((event) => {
               const eventDate = event.date ? new Date(event.date) : null;
@@ -450,6 +451,7 @@ export default async function Home() {
               );
             })}
           </div>
+          )}
         </div>
       </section>
 
