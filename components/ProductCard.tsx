@@ -35,6 +35,7 @@ export default function ProductCard({ product }: ProductProps) {
             src={product.localImage ?? urlFor(product.image!).url()}
             alt={product.name}
             fill
+            unoptimized
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (

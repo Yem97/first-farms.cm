@@ -1,8 +1,8 @@
 import { client } from "@/sanity/lib/client";
-import { featuredProductsQuery, testimonialsQuery, teamMembersQuery } from "@/sanity/lib/queries";
+import { testimonialsQuery, teamMembersQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { createClient } from "@/lib/supabase/server";
-import type { TrainingEvent as DbTrainingEvent } from "@/lib/types";
+import type { TrainingEvent as DbTrainingEvent, Product as DbProduct } from "@/lib/types";
 import HeroSection from "@/components/HeroSection";
 import ProductCard from "@/components/ProductCard";
 import {
@@ -83,12 +83,23 @@ const fallbackTestimonials: Testimonial[] = [
   },
 ];
 
-const fallbackProducts: Product[] = [
-  { _id: "fp1", name: "Premium Plantains",      price: "5,000 XAF / bunch", farmerName: "Celestin Bakam",    region: "Littoral",  category: "Fruits"     },
-  { _id: "fp2", name: "Fresh Tomatoes (25 kg)", price: "15,000 XAF",        farmerName: "Fatima Aboubakar",  region: "Adamaoua",  category: "Vegetables" },
-  { _id: "fp3", name: "Moringa Powder (500 g)", price: "8,000 XAF",         farmerName: "Green Valley Farm", region: "Sud-Ouest", category: "Processed"  },
-  { _id: "fp4", name: "Organic Maize (50 kg)",  price: "20,000 XAF",        farmerName: "Jean-Baptiste Mbo", region: "Ouest",     category: "Grains"     },
-];
+// Map a Supabase products row to the shape ProductCard renders.
+function mapProductRow(p: DbProduct) {
+  const price =
+    p.price != null
+      ? `${p.price.toLocaleString()} ${p.currency || "XAF"}${p.unit ? ` / ${p.unit}` : ""}`
+      : "Contact for price";
+  return {
+    _id: p.id,
+    name: p.name,
+    price,
+    farmerName: p.farmer_name ?? undefined,
+    region: p.region ?? undefined,
+    category: p.category ?? undefined,
+    localImage: p.image_url ?? undefined,
+    whatsappNumber: p.whatsapp_number ?? undefined,
+  };
+}
 
 const fallbackTeam: TeamMember[] = [
   { _id: "tm1", name: "TOGUÉ TOGUÉ Laurent Ghislain", role: "President of the Board of Directors",         localPhoto: "/images/avatars/team-1.svg" },
@@ -126,13 +137,11 @@ const partners = [
 
 /* ── Page ────────────────────────────────────────────────────────── */
 export default async function Home() {
-  let featuredProducts: Product[]     = [];
   let testimonials: Testimonial[]     = [];
   let teamMembers: TeamMember[]       = [];
 
   try {
-    [featuredProducts, testimonials, teamMembers] = await Promise.all([
-      client.fetch(featuredProductsQuery),
+    [testimonials, teamMembers] = await Promise.all([
       client.fetch(testimonialsQuery),
       client.fetch(teamMembersQuery),
     ]);
@@ -140,24 +149,35 @@ export default async function Home() {
     // Sanity not configured — fallback content used
   }
 
-  // Upcoming workshops come from Supabase (posted via /admin/events).
-  // Empty until an admin adds real events — no placeholder sessions.
+  // Products + workshops come LIVE from Supabase (posted by members / admin).
+  // Empty until real data exists — no placeholder listings or sessions.
+  let displayProducts: ReturnType<typeof mapProductRow>[] = [];
   let displayEvents: TrainingEvent[] = [];
   try {
     const supabase = createClient();
-    const { data } = await supabase
-      .from("training_events")
-      .select("*")
-      .order("event_date", { ascending: true, nullsFirst: false })
-      .limit(3);
-    displayEvents = ((data ?? []) as DbTrainingEvent[]).map(mapEventRow);
+    const [prodRes, evtRes] = await Promise.all([
+      supabase
+        .from("products")
+        .select("*")
+        .eq("status", "approved")
+        .eq("available", true)
+        .order("featured", { ascending: false })
+        .order("created_at", { ascending: false })
+        .limit(4),
+      supabase
+        .from("training_events")
+        .select("*")
+        .order("event_date", { ascending: true, nullsFirst: false })
+        .limit(3),
+    ]);
+    displayProducts = ((prodRes.data ?? []) as DbProduct[]).map(mapProductRow);
+    displayEvents = ((evtRes.data ?? []) as DbTrainingEvent[]).map(mapEventRow);
   } catch {
-    // Supabase not configured — section stays empty
+    // Supabase not configured — sections stay empty
   }
 
-  const displayProducts     = featuredProducts.length    > 0 ? featuredProducts    : fallbackProducts;
-  const displayTestimonials = testimonials.length         > 0 ? testimonials         : fallbackTestimonials;
-  const displayTeam         = teamMembers.length          > 0 ? teamMembers          : fallbackTeam;
+  const displayTestimonials = testimonials.length > 0 ? testimonials : fallbackTestimonials;
+  const displayTeam         = teamMembers.length  > 0 ? teamMembers  : fallbackTeam;
   const waNumber            = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "237XXXXXXXXX";
 
   return (
@@ -338,11 +358,19 @@ export default async function Home() {
             View All <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {displayProducts.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
-        </div>
+        {displayProducts.length === 0 ? (
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm py-16 px-6 text-center">
+            <ShoppingBag className="w-10 h-10 mx-auto mb-4 text-gray-300" />
+            <p className="font-bold font-poppins text-primary">No produce listed yet</p>
+            <p className="text-gray-500 text-sm mt-1">Approved listings from cooperative members will appear here.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {displayProducts.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ── UPCOMING EVENTS ───────────────────────────────────────────── */}

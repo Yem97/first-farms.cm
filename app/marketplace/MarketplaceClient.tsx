@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import ProductCard from "@/components/ProductCard";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, ShoppingBag } from "lucide-react";
 
 interface MarketplaceClientProps {
   initialProducts: any[];
 }
 
-const categories = ["All", "Vegetables", "Grains", "Fruits", "Livestock", "Processed"];
+const categories = ["All", "Vegetables", "Fruits", "Grains & Legumes", "Livestock", "Fish & Seafood", "Processed", "Other"];
 
 export default function MarketplaceClient({ initialProducts }: MarketplaceClientProps) {
   const [search, setSearch] = useState("");
@@ -66,9 +66,17 @@ export default function MarketplaceClient({ initialProducts }: MarketplaceClient
           filteredProducts.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))
+        ) : initialProducts.length === 0 ? (
+          <div className="col-span-full py-32 text-center bg-white rounded-3xl shadow-sm border border-gray-100">
+            <ShoppingBag className="w-10 h-10 mx-auto mb-4 text-gray-300" />
+            <p className="text-xl font-bold text-gray-400">No listings yet</p>
+            <p className="text-gray-400 text-sm mt-2 max-w-sm mx-auto">
+              Approved produce from cooperative members will appear here. Be the first to list yours.
+            </p>
+          </div>
         ) : (
           <div className="col-span-full py-32 text-center bg-white rounded-3xl shadow-sm border border-gray-100">
-            <p className="text-xl font-bold text-gray-400">No products found.</p>
+            <p className="text-xl font-bold text-gray-400">No products match your search.</p>
             <button
               onClick={() => { setSearch(""); setActiveCategory("All"); }}
               className="mt-6 text-primary font-bold border-b border-primary"
@@ -79,9 +87,11 @@ export default function MarketplaceClient({ initialProducts }: MarketplaceClient
         )}
       </div>
 
-      <div className="text-center py-12 text-gray-400 text-sm">
-        Showing {filteredProducts.length} of {initialProducts.length} products
-      </div>
+      {initialProducts.length > 0 && (
+        <div className="text-center py-12 text-gray-400 text-sm">
+          Showing {filteredProducts.length} of {initialProducts.length} products
+        </div>
+      )}
     </div>
   );
 }
