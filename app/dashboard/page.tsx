@@ -39,8 +39,8 @@ export default async function DashboardPage({
   const products = (listings ?? []) as Product[];
 
   const toast =
-    searchParams.created ? "Listing submitted — it's now pending review." :
-    searchParams.updated ? "Listing updated — sent for a quick re-review." :
+    searchParams.created ? "Listing submitted. It's now pending review." :
+    searchParams.updated ? "Listing updated. Sent for a quick re-review." :
     searchParams.deleted ? "Listing deleted." : null;
 
   return (
@@ -79,7 +79,7 @@ export default async function DashboardPage({
           <Link href="/admin" className="mb-6 flex items-center justify-between bg-accent text-white rounded-2xl px-6 py-4 hover:bg-accent/90 transition-colors group">
             <span className="flex items-center gap-2 text-sm font-bold">
               <ShieldCheck className="w-4 h-4" />
-              Open the Admin Panel — manage users, listings & content
+              Open the Admin Panel: manage users, listings & content
             </span>
             <span className="text-white/70 group-hover:translate-x-1 transition-transform">→</span>
           </Link>
@@ -94,21 +94,21 @@ export default async function DashboardPage({
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
             <div>
               <dt className="text-gray-400 uppercase tracking-wider text-xs font-bold mb-1">Full Name</dt>
-              <dd className="text-gray-800 font-medium">{profile?.full_name || "—"}</dd>
+              <dd className="text-gray-800 font-medium">{profile?.full_name || "Not set"}</dd>
             </div>
             <div>
               <dt className="text-gray-400 uppercase tracking-wider text-xs font-bold mb-1">Phone</dt>
-              <dd className="text-gray-800 font-medium">{profile?.phone || "—"}</dd>
+              <dd className="text-gray-800 font-medium">{profile?.phone || "Not set"}</dd>
             </div>
             <div>
               <dt className="text-gray-400 uppercase tracking-wider text-xs font-bold mb-1">Region</dt>
               <dd className="text-gray-800 font-medium flex items-center gap-1.5">
-                {profile?.region ? (<><MapPin className="w-3.5 h-3.5 text-secondary" />{profile.region}</>) : "—"}
+                {profile?.region ? (<><MapPin className="w-3.5 h-3.5 text-secondary" />{profile.region}</>) : "Not set"}
               </dd>
             </div>
             <div>
               <dt className="text-gray-400 uppercase tracking-wider text-xs font-bold mb-1">Farming Type</dt>
-              <dd className="text-gray-800 font-medium">{profile?.farming_type || "—"}</dd>
+              <dd className="text-gray-800 font-medium">{profile?.farming_type || "Not set"}</dd>
             </div>
           </dl>
         </div>
@@ -135,7 +135,7 @@ export default async function DashboardPage({
                 <PackageOpen className="w-6 h-6" />
               </div>
               <p className="text-sm font-medium text-gray-500">You have no listings yet.</p>
-              <p className="text-xs mt-1 max-w-xs">Post your first produce listing — it goes live after a quick admin review.</p>
+              <p className="text-xs mt-1 max-w-xs">Post your first produce listing. It goes live after a quick admin review.</p>
             </div>
           ) : (
             <ul className="divide-y divide-gray-100">

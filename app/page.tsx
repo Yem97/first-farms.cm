@@ -91,10 +91,10 @@ const fallbackProducts: Product[] = [
 const fallbackTeam: TeamMember[] = [
   { _id: "tm1", name: "TOGUÉ TOGUÉ Laurent Ghislain", role: "President of the Board of Directors",         localPhoto: "/images/avatars/team-1.svg" },
   { _id: "tm2", name: "Tita Pascline Wokongwo",        role: "Asst. Secretary / Financial Secretary",       localPhoto: "/images/avatars/team-2.svg" },
-  { _id: "tm3", name: "Siani Tomaha André",             role: "Member — Board of Directors",                 localPhoto: "/images/avatars/team-3.svg" },
-  { _id: "tm4", name: "Walter Ngwa Shu",                role: "Chairperson / Asst. Treasurer — Supervisory", localPhoto: "/images/avatars/team-4.svg" },
-  { _id: "tm5", name: "Senge Grace Ebong",              role: "Secretary / Communication — Supervisory",     localPhoto: "/images/avatars/team-5.svg" },
-  { _id: "tm6", name: "Ndip Prestile Anne",             role: "Member — Supervisory Board",                  localPhoto: "/images/avatars/team-6.svg" },
+  { _id: "tm3", name: "Siani Tomaha André",             role: "Member, Board of Directors",                  localPhoto: "/images/avatars/team-3.svg" },
+  { _id: "tm4", name: "Walter Ngwa Shu",                role: "Chairperson / Asst. Treasurer, Supervisory",  localPhoto: "/images/avatars/team-4.svg" },
+  { _id: "tm5", name: "Senge Grace Ebong",              role: "Secretary / Communication, Supervisory",      localPhoto: "/images/avatars/team-5.svg" },
+  { _id: "tm6", name: "Ndip Prestile Anne",             role: "Member, Supervisory Board",                   localPhoto: "/images/avatars/team-6.svg" },
 ];
 
 const fallbackEvents: TrainingEvent[] = [
@@ -208,8 +208,8 @@ export default async function Home() {
               AI-Powered Diagnosis for Every Agro-Ecosystem
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Firstfarms Digital Cooperative harnesses Artificial Intelligence — through our flagship
-              platform AgriExpert AI — to deliver integrated diagnosis across agricultural and natural
+              Firstfarms Digital Cooperative harnesses Artificial Intelligence, through our flagship
+              platform AgriExpert AI, to deliver integrated diagnosis across agricultural and natural
               systems, empowering farmers, wildlife managers, and agribusiness operators.
             </p>
             <ul className="space-y-3">
@@ -249,7 +249,7 @@ export default async function Home() {
             </p>
             <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed">
               An intelligent tool that combines Artificial Intelligence with field data to provide an
-              integrated diagnosis of agricultural and natural systems — guiding treatment decisions
+              integrated diagnosis of agricultural and natural systems, guiding treatment decisions
               and sustainable management in a holistic Agro ecosystem approach.
             </p>
           </div>
@@ -364,7 +364,7 @@ export default async function Home() {
               </h2>
               <p className="text-gray-500 mt-2 text-sm">
                 {upcomingTrainings.length > 0
-                  ? `${upcomingTrainings.length} session${upcomingTrainings.length > 1 ? "s" : ""} open — register your spot today`
+                  ? `${upcomingTrainings.length} session${upcomingTrainings.length > 1 ? "s" : ""} open. Register your spot today`
                   : "Sessions across all 10 regions of Cameroon"}
               </p>
             </div>

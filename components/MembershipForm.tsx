@@ -28,7 +28,7 @@ export default function MembershipForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const msg = encodeURIComponent(
-      `*New Membership Application — Firstfarms Digital Cooperative*\n\n` +
+      `*New Membership Application: Firstfarms Digital Cooperative*\n\n` +
       `👤 Name: ${form.name}\n` +
       `📞 Phone: ${form.phone}\n` +
       `📧 Email: ${form.email || "Not provided"}\n` +

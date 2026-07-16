@@ -23,7 +23,7 @@ export default function TrainingInterestForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const msg = encodeURIComponent(
-      `*Training Interest — Firstfarms Digital Cooperative*\n\n` +
+      `*Training Interest: Firstfarms Digital Cooperative*\n\n` +
       `👤 Name: ${form.name}\n` +
       `📞 Phone: ${form.phone}\n` +
       `📚 Topic of Interest: ${form.topic}`

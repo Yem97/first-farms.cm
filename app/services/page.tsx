@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Our Services | Firstfarms Digital Cooperative",
-  description: "Digital platform services for cooperative agriculture in Cameroon — cooperative management, market access, digital marketing, and education.",
+  description: "Digital platform services for cooperative agriculture in Cameroon: cooperative management, market access, digital marketing, and education.",
 };
 
 const pillars = [
@@ -95,7 +95,7 @@ const roadmap = [
   { year: "2027", focus: "Pilot Launch", desc: "Onboard 20+ cooperatives, 1,500 members, and launch training programs." },
   { year: "2028", focus: "National Rollout", desc: "Expand to 5,000+ members across all 10 regions with full market access." },
   { year: "2029", focus: "Revenue Growth", desc: "Mixed revenue from subscriptions, services, and transaction commissions." },
-  { year: "2030", focus: "Sustainability", desc: "Platform fully self-sustaining — scalable nationwide without grant reliance." },
+  { year: "2030", focus: "Sustainability", desc: "Platform fully self-sustaining, scalable nationwide without grant reliance." },
 ];
 
 export default function ServicesPage() {
@@ -115,7 +115,7 @@ export default function ServicesPage() {
               A Complete Digital Platform for Cooperative Agriculture
             </h1>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-10 max-w-2xl">
-              From managing cooperative members to connecting farmers with buyers — Firstfarms Digital Cooperative provides
+              From managing cooperative members to connecting farmers with buyers, Firstfarms Digital Cooperative provides
               the digital infrastructure that smallholder cooperatives need to grow, coordinate, and thrive.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -266,7 +266,7 @@ export default function ServicesPage() {
             Ready to Build the Future of Cooperative Agriculture?
           </h2>
           <p className="text-gray-300 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-            Whether you're a cooperative, an NGO, a buyer, or an agribusiness — Firstfarms Digital Cooperative has a service built for you.
+            Whether you're a cooperative, an NGO, a buyer, or an agribusiness, Firstfarms Digital Cooperative has a service built for you.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

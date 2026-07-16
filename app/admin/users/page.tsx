@@ -57,7 +57,7 @@ export default async function AdminUsers() {
                     )}
                   </div>
                   <p className="text-xs text-gray-400 mt-0.5 truncate">
-                    {emailById.get(p.id) || "—"}
+                    {emailById.get(p.id) || "Not set"}
                     {p.region ? ` · ${p.region}` : ""}
                     {p.farming_type ? ` · ${p.farming_type}` : ""}
                   </p>

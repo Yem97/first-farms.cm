@@ -58,7 +58,7 @@ export default async function AdminOverview() {
         </div>
 
         {pendingProducts.length === 0 ? (
-          <p className="text-sm text-gray-400 py-6 text-center">Nothing pending — the queue is clear. 🎉</p>
+          <p className="text-sm text-gray-400 py-6 text-center">Nothing pending. The queue is clear. 🎉</p>
         ) : (
           <ul className="divide-y divide-gray-100">
             {pendingProducts.map((p) => (

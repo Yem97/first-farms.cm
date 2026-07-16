@@ -153,7 +153,7 @@ export default async function EducationPage() {
         <p className="text-center text-gray-500 mb-4">Physical and virtual sessions across Cameroon.</p>
         {usingFallback && (
           <p className="text-center text-xs text-secondary font-semibold uppercase tracking-widest mb-12">
-            Sample schedule — real sessions added via Sanity Studio
+            Sample schedule. Real sessions are added by an administrator.
           </p>
         )}
         {!usingFallback && <div className="mb-12" />}

@@ -100,7 +100,7 @@ export default function HeroSection() {
         >
           Combining Artificial Intelligence with field data to identify plant diseases, detect
           animal pathologies, analyse water quality, optimize livestock industries, and monitor
-          forest ecosystems — guiding sustainable management in a holistic Agro ecosystem approach.
+          forest ecosystems, guiding sustainable management in a holistic agro-ecosystem approach.
         </motion.p>
 
         {/* CTAs */}

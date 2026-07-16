@@ -8,10 +8,10 @@ delete from public.team_members;
 insert into public.team_members (name, role, board, sort_order) values
   ('TOGUÉ TOGUÉ Laurent Ghislain', 'President of the Board of Directors',         'directors',   1),
   ('Tita Pascline Wokongwo',       'Asst. Secretary / Financial Secretary',        'directors',   2),
-  ('Siani Tomaha André',           'Member — Board of Directors',                  'directors',   3),
-  ('Walter Ngwa Shu',              'Chairperson / Asst. Treasurer — Supervisory',  'supervisory', 1),
-  ('Senge Grace Ebong',            'Secretary / Communication — Supervisory',      'supervisory', 2),
-  ('Ndip Prestile Anne',           'Member — Supervisory Board',                   'supervisory', 3);
+  ('Siani Tomaha André',           'Member, Board of Directors',                   'directors',   3),
+  ('Walter Ngwa Shu',              'Chairperson / Asst. Treasurer, Supervisory',   'supervisory', 1),
+  ('Senge Grace Ebong',            'Secretary / Communication, Supervisory',       'supervisory', 2),
+  ('Ndip Prestile Anne',           'Member, Supervisory Board',                    'supervisory', 3);
 
 -- ---------- Testimonials ----------
 delete from public.testimonials;

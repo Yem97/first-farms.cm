@@ -36,10 +36,10 @@ interface TeamMember {
 const fallbackTeam: TeamMember[] = [
   { _id: 'ft1', name: 'TOGUÉ TOGUÉ Laurent Ghislain', role: 'President of the Board of Directors',          localPhoto: '/images/avatars/team-1.svg' },
   { _id: 'ft2', name: 'Tita Pascline Wokongwo',        role: 'Asst. Secretary / Financial Secretary',        localPhoto: '/images/avatars/team-2.svg' },
-  { _id: 'ft3', name: 'Siani Tomaha André',             role: 'Member — Board of Directors',                  localPhoto: '/images/avatars/team-3.svg' },
-  { _id: 'ft4', name: 'Walter Ngwa Shu',                role: 'Chairperson / Asst. Treasurer — Supervisory',  localPhoto: '/images/avatars/team-4.svg' },
-  { _id: 'ft5', name: 'Senge Grace Ebong',              role: 'Secretary / Communication — Supervisory',      localPhoto: '/images/avatars/team-5.svg' },
-  { _id: 'ft6', name: 'Ndip Prestile Anne',             role: 'Member — Supervisory Board',                   localPhoto: '/images/avatars/team-6.svg' },
+  { _id: 'ft3', name: 'Siani Tomaha André',             role: 'Member, Board of Directors',                   localPhoto: '/images/avatars/team-3.svg' },
+  { _id: 'ft4', name: 'Walter Ngwa Shu',                role: 'Chairperson / Asst. Treasurer, Supervisory',   localPhoto: '/images/avatars/team-4.svg' },
+  { _id: 'ft5', name: 'Senge Grace Ebong',              role: 'Secretary / Communication, Supervisory',       localPhoto: '/images/avatars/team-5.svg' },
+  { _id: 'ft6', name: 'Ndip Prestile Anne',             role: 'Member, Supervisory Board',                    localPhoto: '/images/avatars/team-6.svg' },
 ];
 
 const galleryImages = [
@@ -89,7 +89,7 @@ export default async function AboutPage() {
               Firstfarms Digital Cooperative is a youth- and women-led digital agricultural cooperative operating across the North West and other regions of Cameroon. It was founded on a simple conviction: that Artificial Intelligence can fundamentally transform how African farmers diagnose, manage, and optimize their agro-ecosystems.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Operating as the AgriTech &amp; Wildlife Incubation Hub for Digital Innovation, our flagship platform — AgriExpert AI — delivers integrated diagnosis across plant diseases, animal pathologies, water quality, livestock industries, and forest ecosystems in one unified solution.
+              Operating as an AgriTech &amp; Wildlife Incubation Hub for Digital Innovation, our flagship platform AgriExpert AI delivers integrated diagnosis across plant diseases, animal pathologies, water quality, livestock industries, and forest ecosystems in one unified solution.
             </p>
             <div className="grid grid-cols-2 gap-8 pt-8">
               <div>
@@ -132,7 +132,7 @@ export default async function AboutPage() {
           <div className="bg-white p-12 rounded-[2rem] shadow-sm border border-gray-100">
             <h3 className="text-2xl font-bold font-poppins text-primary mb-6">Our Vision</h3>
             <p className="text-gray-600 leading-relaxed text-lg italic">
-              &ldquo;To become the leading Agro-Ecosystem AI platform in Sub-Saharan Africa — recognized for diagnostic accuracy, sustainability, and its role in building food security and environmental resilience.&rdquo;
+              &ldquo;To become the leading Agro-Ecosystem AI platform in Sub-Saharan Africa, recognized for diagnostic accuracy, sustainability, and its role in building food security and environmental resilience.&rdquo;
             </p>
           </div>
         </div>
@@ -176,7 +176,7 @@ export default async function AboutPage() {
             <h2 className="text-3xl md:text-5xl font-bold font-poppins mb-6">FFD-2031</h2>
             <p className="text-gray-300 leading-relaxed">
               In line with its transformation journey, Firstfarms Digital Cooperative is launching
-              <strong className="text-white"> FFD-2031</strong> — its new five-year plan focused on efficiency.
+              <strong className="text-white"> FFD-2031</strong>, its new five-year plan focused on efficiency.
               Far more than a strategic plan, it expresses an ambition: to build a more agile, more demanding,
               and fully committed organization, serving its goal of creating an African agricultural
               cooperative for the world.
