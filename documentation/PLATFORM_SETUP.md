@@ -66,18 +66,20 @@ your go-ahead. Say the word and I'll wire real uploads (≈30 min of work).
    - **Listings** → *Approve* your listing. It's now Live.
    - **Users** → you'll see yourself; try the role/suspend controls on a second
      test account.
-   - **Blog** → *New Post* → write, publish.
+   - **Blog** → *New Post* → write, tick Published → then open **`/blog`** on
+     the public site and your article is live. (This full loop works now.)
    - **Events** → *New Event* → schedule a training.
-4. (Phase 5, not yet wired) the public marketplace/blog/education pages still
-   read the old fallback data — connecting them to your live Supabase data is
-   the next phase.
+4. (Phase 5, partly done) the public **blog** now reads live from Supabase.
+   The **marketplace / education / home** sections still show fallback data —
+   wiring those to your live Supabase data is the remaining next phase.
 
 ---
 
 ## What's intentionally NOT done yet (next session)
 
-- **Phase 5** — wire the public pages (marketplace, blog, education, home
-  featured/testimonials/team) to read live from Supabase, then fully retire Sanity.
+- **Phase 5** — public **blog** is done (reads live from Supabase). Still to
+  wire: marketplace, education, and home featured/testimonials/team → live
+  Supabase data, then fully remove the Sanity package.
 - **Photo upload** — pending your OK on a Storage bucket (see to-do #4).
 - **Phone/SMS login** — deferred (needs a paid SMS provider).
 - Old placeholders still to replace: contact `+237 6XX XXX XXX`,
