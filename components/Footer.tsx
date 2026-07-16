@@ -19,10 +19,10 @@ export default function Footer() {
               </div>
               <div className="flex flex-col leading-[1.2]">
                 <span className="text-xl font-bold font-poppins tracking-tight">
-                  AgriTech <span className="text-secondary">Hub</span>
+                  Firstfarms <span className="text-secondary">Cooperative</span>
                 </span>
                 <span className="text-[10px] text-gray-400 tracking-wide">
-                  AgriTech &amp; Wildlife Incubation Hub
+                  Digital Cooperative · Cameroon
                 </span>
               </div>
             </Link>
@@ -79,7 +79,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 text-center text-gray-400 text-xs">
-          <p>© {currentYear} AgriTech &amp; Wildlife Incubation Hub. All Rights Reserved.</p>
+          <p>© {currentYear} Firstfarms Digital Cooperative Cameroon. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
@@ -93,7 +93,7 @@ function NewsletterWidget() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const msg = encodeURIComponent(`Hello AgriTech Hub! I'd like to subscribe to your WhatsApp updates. My number is ${phone}.`);
+    const msg = encodeURIComponent(`Hello Firstfarms Digital Cooperative! I'd like to subscribe to your WhatsApp updates. My number is ${phone}.`);
     window.open(`https://wa.me/${whatsapp}?text=${msg}`, "_blank");
     setDone(true);
   }

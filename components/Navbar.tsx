@@ -61,11 +61,11 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col leading-[1.2]">
               <span className="font-bold font-poppins text-sm leading-tight">
-                <span className="text-primary">AgriTech</span>
-                <span className="text-gray-800"> Hub</span>
+                <span className="text-primary">Firstfarms</span>
+                <span className="text-gray-800"> Cooperative</span>
               </span>
               <span className="text-[9px] font-semibold text-secondary uppercase tracking-[0.14em]">
-                Digital Innovation
+                Digital · Cameroon
               </span>
             </div>
           </Link>

@@ -1,4 +1,4 @@
-// Shared row types for the AgriTech Hub platform (Supabase).
+// Shared row types for the Firstfarms Digital Cooperative platform (Supabase).
 // Kept hand-written for app code; can later be replaced by
 // `supabase gen types typescript` output if desired.
 

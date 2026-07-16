@@ -57,7 +57,7 @@ export default function HeroSection() {
           className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-secondary text-[11px] font-bold uppercase tracking-[0.22em] px-4 py-2 rounded-full mb-6"
         >
           <Brain className="w-3.5 h-3.5 shrink-0" />
-          AgriTech &amp; Wildlife Incubation Hub
+          Firstfarms Digital Cooperative
         </motion.div>
 
         {/* Product name */}

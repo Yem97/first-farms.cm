@@ -2,7 +2,26 @@ import { client } from "@/sanity/lib/client";
 import { teamMembersQuery } from "@/sanity/lib/queries";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { CheckCircle, Heart, Star, Target } from "lucide-react";
+import {
+  CheckCircle, Heart, Star, Target,
+  Leaf, Beef, Fish, Egg, Trees,
+  Users, TrendingUp, Briefcase, Building2, ArrowUpRight,
+} from "lucide-react";
+
+const focusAreas = [
+  { title: "Agricultural",        desc: "Crop production, soil health, and climate-smart farming.",        icon: Leaf  },
+  { title: "Livestock",           desc: "Herd management, animal health, and productivity.",               icon: Beef  },
+  { title: "Fisheries & Aquaculture", desc: "Water quality, fish farming, and sustainable yields.",         icon: Fish  },
+  { title: "Animal Industries",   desc: "Poultry and value-chain processing for farmers.",                 icon: Egg   },
+  { title: "Forestry & Wildlife", desc: "Ecosystem monitoring and biodiversity protection.",               icon: Trees },
+];
+
+const ffdPillars = [
+  { title: "Human Capital Efficiency",   icon: Users      },
+  { title: "Commercial Efficiency",      icon: TrendingUp },
+  { title: "Human Resources Efficiency", icon: Briefcase  },
+  { title: "Organizational Efficiency",  icon: Building2  },
+];
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +34,7 @@ interface TeamMember {
 }
 
 const fallbackTeam: TeamMember[] = [
-  { _id: 'ft1', name: 'TOGUÉ TOGUÉ Laurent Ghislain', role: 'Chairperson — Board of Directors',             localPhoto: '/images/avatars/team-1.svg' },
+  { _id: 'ft1', name: 'TOGUÉ TOGUÉ Laurent Ghislain', role: 'President of the Board of Directors',          localPhoto: '/images/avatars/team-1.svg' },
   { _id: 'ft2', name: 'Tita Pascline Wokongwo',        role: 'Asst. Secretary / Financial Secretary',        localPhoto: '/images/avatars/team-2.svg' },
   { _id: 'ft3', name: 'Siani Tomaha André',             role: 'Member — Board of Directors',                  localPhoto: '/images/avatars/team-3.svg' },
   { _id: 'ft4', name: 'Walter Ngwa Shu',                role: 'Chairperson / Asst. Treasurer — Supervisory',  localPhoto: '/images/avatars/team-4.svg' },
@@ -67,7 +86,7 @@ export default async function AboutPage() {
           <div className="w-full lg:w-1/2 space-y-8">
             <h2 className="text-4xl font-bold font-poppins text-primary">Our Story</h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Firstfarms Digital Cooperative Society was established by agricultural innovators and technology pioneers who recognized that Artificial Intelligence could fundamentally transform how African farmers diagnose, manage, and optimize their agro-ecosystems.
+              Firstfarms Digital Cooperative is a youth- and women-led digital agricultural cooperative operating across the North West and other regions of Cameroon. It was founded on a simple conviction: that Artificial Intelligence can fundamentally transform how African farmers diagnose, manage, and optimize their agro-ecosystems.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed">
               Operating as the AgriTech &amp; Wildlife Incubation Hub for Digital Innovation, our flagship platform — AgriExpert AI — delivers integrated diagnosis across plant diseases, animal pathologies, water quality, livestock industries, and forest ecosystems in one unified solution.
@@ -115,6 +134,69 @@ export default async function AboutPage() {
             <p className="text-gray-600 leading-relaxed text-lg italic">
               &ldquo;To become the leading Agro-Ecosystem AI platform in Sub-Saharan Africa — recognized for diagnostic accuracy, sustainability, and its role in building food security and environmental resilience.&rdquo;
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Focus Areas */}
+      <section className="py-24 container mx-auto px-6">
+        <div className="text-center mb-16">
+          <span className="inline-block text-secondary font-bold uppercase tracking-widest text-xs px-3 py-1.5 bg-secondary/10 rounded-full mb-4">
+            What We Cover
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold font-poppins text-primary">Our Focus Areas</h2>
+          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
+            A holistic agro-ecosystem approach spanning five interconnected sectors.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+          {focusAreas.map((f) => (
+            <div
+              key={f.title}
+              className="bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all p-6 text-center group"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                <f.icon className="w-7 h-7" />
+              </div>
+              <h3 className="font-bold font-poppins text-primary text-sm mb-2">{f.title}</h3>
+              <p className="text-gray-500 text-xs leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FFD-2031 strategic plan */}
+      <section className="py-24 bg-primary text-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center mb-14">
+            <span className="inline-flex items-center gap-2 text-secondary font-bold uppercase tracking-widest text-xs px-3 py-1.5 bg-secondary/20 rounded-full mb-5">
+              <ArrowUpRight className="w-3.5 h-3.5" />
+              2026 – 2031
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold font-poppins mb-6">FFD-2031</h2>
+            <p className="text-gray-300 leading-relaxed">
+              In line with its transformation journey, Firstfarms Digital Cooperative is launching
+              <strong className="text-white"> FFD-2031</strong> — its new five-year plan focused on efficiency.
+              Far more than a strategic plan, it expresses an ambition: to build a more agile, more demanding,
+              and fully committed organization, serving its goal of creating an African agricultural
+              cooperative for the world.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {ffdPillars.map((p, i) => (
+              <div
+                key={p.title}
+                className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 hover:bg-white/15 transition-colors"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-11 h-11 bg-secondary/20 rounded-xl flex items-center justify-center">
+                    <p.icon className="w-5 h-5 text-secondary" />
+                  </div>
+                  <span className="text-white/30 font-bold font-poppins text-2xl">0{i + 1}</span>
+                </div>
+                <h3 className="font-bold font-poppins text-white text-sm leading-snug">{p.title}</h3>
+              </div>
+            ))}
           </div>
         </div>
       </section>

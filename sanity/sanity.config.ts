@@ -6,7 +6,7 @@ import FirstFarmsStudioLogo from './components/StudioLogo'
 
 export default defineConfig({
   name: 'default',
-  title: 'AgriTech Hub — Admin Studio',
+  title: 'Firstfarms Digital Cooperative — Admin Studio',
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   basePath: '/studio',

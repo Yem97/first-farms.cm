@@ -1,5 +1,5 @@
 -- ============================================================
--- AgriTech Hub / AgriExpert AI — Initial Schema
+-- Firstfarms Digital Cooperative / AgriExpert AI — Initial Schema
 -- Supabase (Postgres) · Phase 1 Foundation
 -- Run this in the Supabase SQL Editor (or via `supabase db push`).
 -- ============================================================

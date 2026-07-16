@@ -20,7 +20,7 @@ export default function FirstFarmsStudioLogo() {
       </div>
       <div style={{ lineHeight: 1.1 }}>
         <span style={{ fontFamily: 'sans-serif', fontWeight: 700, color: '#1B5E20', fontSize: '13px', display: 'block' }}>
-          AgriTech Hub
+          Firstfarms Cooperative
         </span>
         <span style={{ fontFamily: 'sans-serif', fontWeight: 500, color: '#F9A825', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           Admin Studio

@@ -30,7 +30,7 @@ export default async function LoginPage({
             <Sprout className="w-7 h-7 text-white" />
           </div>
           <h1 className="text-2xl font-bold font-poppins text-primary">Welcome back</h1>
-          <p className="text-gray-500 text-sm mt-1">Sign in to your AgriTech Hub account</p>
+          <p className="text-gray-500 text-sm mt-1">Sign in to your Firstfarms Digital Cooperative account</p>
         </div>
 
         <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
@@ -38,7 +38,7 @@ export default async function LoginPage({
         </div>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          New to AgriTech Hub?{" "}
+          New to Firstfarms?{" "}
           <Link href="/signup" className="text-primary font-bold hover:text-secondary transition-colors">
             Create an account
           </Link>

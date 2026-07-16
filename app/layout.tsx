@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 const poppins = Poppins({ weight: ["400", "500", "600", "700"], subsets: ["latin"], variable: "--font-poppins", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "AgriTech Hub — AgriExpert AI | Intelligent Agro-Ecosystem Diagnosis",
-  description: "AgriTech & Wildlife Incubation Hub for Digital Innovation. AgriExpert AI combines Artificial Intelligence with field data to diagnose plant diseases, animal pathologies, water quality, and forest ecosystems.",
+  title: "Firstfarms Digital Cooperative | Empowering Smallholder Farmers Through Digital Innovation",
+  description: "Firstfarms Digital Cooperative Cameroon — a youth- and women-led digital agricultural cooperative. Home of AgriExpert AI, our AI-powered agri-education and smart-farming platform across agriculture, livestock, fisheries, animal industries, forestry and wildlife.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

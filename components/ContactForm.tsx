@@ -23,7 +23,7 @@ export default function ContactForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const msg = encodeURIComponent(
-      `*Message via AgriTech Hub Website*\n\n` +
+      `*Message via Firstfarms Digital Cooperative Website*\n\n` +
       `👤 Name: ${form.name}\n` +
       `📧 Email: ${form.email}\n` +
       `📞 Phone: ${form.phone || "Not provided"}\n` +

@@ -60,7 +60,7 @@ interface TrainingEvent {
 const fallbackTestimonials: Testimonial[] = [
   {
     _id: "ft1",
-    quote: "Since joining AgriTech Hub, I have doubled my income by selling directly to buyers in Douala. No more middlemen taking our profits.",
+    quote: "Since joining Firstfarms, I have doubled my income by selling directly to buyers in Douala. No more middlemen taking our profits.",
     farmerName: "Celestin Bakam",
     region: "Adamaoua",
     localPhoto: "/images/avatars/testimonial-1.svg",
@@ -74,7 +74,7 @@ const fallbackTestimonials: Testimonial[] = [
   },
   {
     _id: "ft3",
-    quote: "AgriTech Hub gave me access to tools, storage, and markets I never thought I could reach as a small farmer in the North.",
+    quote: "Firstfarms gave me access to tools, storage, and markets I never thought I could reach as a small farmer in the North.",
     farmerName: "Ibrahim Yaya",
     region: "Nord",
     localPhoto: "/images/avatars/testimonial-3.svg",
@@ -89,7 +89,7 @@ const fallbackProducts: Product[] = [
 ];
 
 const fallbackTeam: TeamMember[] = [
-  { _id: "tm1", name: "TOGUÉ TOGUÉ Laurent Ghislain", role: "Chairperson — Board of Directors",            localPhoto: "/images/avatars/team-1.svg" },
+  { _id: "tm1", name: "TOGUÉ TOGUÉ Laurent Ghislain", role: "President of the Board of Directors",         localPhoto: "/images/avatars/team-1.svg" },
   { _id: "tm2", name: "Tita Pascline Wokongwo",        role: "Asst. Secretary / Financial Secretary",       localPhoto: "/images/avatars/team-2.svg" },
   { _id: "tm3", name: "Siani Tomaha André",             role: "Member — Board of Directors",                 localPhoto: "/images/avatars/team-3.svg" },
   { _id: "tm4", name: "Walter Ngwa Shu",                role: "Chairperson / Asst. Treasurer — Supervisory", localPhoto: "/images/avatars/team-4.svg" },
@@ -127,7 +127,7 @@ const fallbackEvents: TrainingEvent[] = [
     location: "Bafoussam",
     region: "Ouest",
     topic: "Business Skills",
-    trainer: "AgriTech Hub Facilitator",
+    trainer: "Firstfarms Facilitator",
     registrationOpen: false,
     spotsAvailable: 60,
   },
@@ -208,9 +208,9 @@ export default async function Home() {
               AI-Powered Diagnosis for Every Agro-Ecosystem
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              AgriTech &amp; Wildlife Incubation Hub for Digital Innovation harnesses Artificial
-              Intelligence to deliver integrated diagnosis across agricultural and natural systems —
-              empowering farmers, wildlife managers, and agribusiness operators with precision tools.
+              Firstfarms Digital Cooperative harnesses Artificial Intelligence — through our flagship
+              platform AgriExpert AI — to deliver integrated diagnosis across agricultural and natural
+              systems, empowering farmers, wildlife managers, and agribusiness operators.
             </p>
             <ul className="space-y-3">
               {[
@@ -383,7 +383,7 @@ export default async function Home() {
               const monthYear = eventDate
                 ? eventDate.toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase()
                 : "DATE TBD";
-              const waMsg = encodeURIComponent(`Hello AgriTech Hub! I would like to register for: ${event.title}`);
+              const waMsg = encodeURIComponent(`Hello Firstfarms! I would like to register for: ${event.title}`);
               const isOpen = event.registrationOpen !== false;
 
               return (

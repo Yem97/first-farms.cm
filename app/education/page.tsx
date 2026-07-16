@@ -51,7 +51,7 @@ const fallbackEvents: TrainingEvent[] = [
     location: "Bafoussam",
     region: "Ouest",
     topic: "Business Skills",
-    trainer: "AgriTech Hub Facilitator",
+    trainer: "Firstfarms Facilitator",
     registrationOpen: false,
     spotsAvailable: 60,
   },
